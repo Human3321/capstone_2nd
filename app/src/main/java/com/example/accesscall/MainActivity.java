@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.CallLog;
+import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -171,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         StringBuffer buf = new StringBuffer();
         Cursor cursor = managedQuery(CallLog.Calls.CONTENT_URI,null,null, null, null);
 //        Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,null, null, null);
-//        cursor.moveToFirst();
+        cursor.moveToFirst();
 
         int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
         int name = cursor.getColumnIndex(CallLog.Calls.CACHED_NAME);
@@ -180,6 +181,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         while (cursor.moveToNext()) {
             String callname = cursor.getString(name);
             String phoneNum = cursor.getString(number);
+            phoneNum = PhoneNumberUtils.formatNumber(phoneNum);
             String callDate = cursor.getString(date);
             Date callDayTime = new Date(Long.valueOf(callDate));
             Date now = new Date();
@@ -190,7 +192,11 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             adapter.addItem(new PhoneNumInfo(callname, phoneNum));
         }
         Log.d("getCallLog","getCallLog호출");
-        // cursor.close();
+
+        for(int i = 0;i<adapter.items.size();i++){
+            Log.d("item","item["+i+"]:"+adapter.items.get(i).getName()+", "+adapter.items.get(i).getPhoneNumber());
+        }
+        cursor.close();
 
         // 로드 테스트용 코드
         Toast.makeText(this, "안심번호 로드 "+adapter.items.get(i).getName()+adapter.items.get(i).getPhoneNumber(), Toast.LENGTH_LONG).show();

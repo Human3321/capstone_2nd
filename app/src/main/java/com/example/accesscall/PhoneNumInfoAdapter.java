@@ -1,5 +1,6 @@
 package com.example.accesscall;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 public class PhoneNumInfoAdapter extends RecyclerView.Adapter<PhoneNumInfoAdapter.ViewHolder>{
     MainActivity main;
-    static public ArrayList<PhoneNumInfo> items = new ArrayList<PhoneNumInfo>();
+    public ArrayList<PhoneNumInfo> items = new ArrayList<PhoneNumInfo>();
 
     public void addItem(PhoneNumInfo item){
         if(!items.contains(item))
@@ -64,8 +65,10 @@ public class PhoneNumInfoAdapter extends RecyclerView.Adapter<PhoneNumInfoAdapte
         boolean flag = false;
         for(int i = 0; i < items.size(); i++){
             PhoneNumInfo info = items.get(i);
-            if(info.getPhoneNumber() == phoneNum){
-                return (flag=true);
+            Log.d("check","item:"+info.getName()+"/"+info.getPhoneNumber()+"phoneNum:"+phoneNum);
+            if(info.getPhoneNumber().equals(phoneNum)){
+                flag = true;
+                return flag;
             }
         }
         return flag;

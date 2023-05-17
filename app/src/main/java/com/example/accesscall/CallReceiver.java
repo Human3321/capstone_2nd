@@ -50,18 +50,6 @@ public class CallReceiver extends BroadcastReceiver {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("MissingPermission")
 
-/*
-    public boolean newPhoneNumCheck(String phoneNum){
-        boolean flag = false;
-        for(int i = 0; i < adapter.items.size(); i++){
-            PhoneNumInfo info = adapter.items.get(i);
-            if(info.getPhoneNumber() == phoneNum){
-                return (flag=true);
-            }
-        }
-        return flag;
-    }*/
-
     @Override
     public void onReceive(Context context, Intent intent) {
         // 진동 설정
