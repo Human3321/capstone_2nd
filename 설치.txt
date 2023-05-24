@@ -1,0 +1,9 @@
+%%bash
+apt-get update
+apt-get install g++ openjdk-8-jdk python-dev python3-dev
+pip3 install JPype1
+pip3 install konlpy
+
+JAVA_HOME 환경변수 설정하기
+
+%env JAVA_HOME "/usr/lib/jvm/java-8-openjdk-amd64"
