@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">다잡아</string>
-    <string name="accessibility_service_name">다잡아</string>
-    <string name="accessibility_service_description">통화 중 사용자를 보이스피싱 위협으로부터 보호하기 위해 음성 데이터에 접근합니다.</string>
-</resources>
