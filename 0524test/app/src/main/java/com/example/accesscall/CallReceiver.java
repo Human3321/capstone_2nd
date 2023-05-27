@@ -77,6 +77,10 @@ public class CallReceiver extends BroadcastReceiver {
 
                 // [벨 울리는 중]
                 if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
+                    Intent launchIntent = new Intent(context.getApplicationContext(), MainActivity.class);
+                    launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(launchIntent);
+
                     if (MainActivity.use_set == true) {
                         String phone;
                         if (intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER) != null) {
@@ -129,6 +133,11 @@ public class CallReceiver extends BroadcastReceiver {
 
                 // [통화 중]
                 else if (state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
+
+                    Intent launchIntent = new Intent(context.getApplicationContext(), MainActivity.class);
+                    launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(launchIntent);
+
                     if (intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER) != null) {
                         // 안심번호 판별을 위해 추가----
                         String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
