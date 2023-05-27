@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class PhoneNumInfoAdapter extends RecyclerView.Adapter<PhoneNumInfoAdapter.ViewHolder>{
     MainActivity main;
-    public ArrayList<PhoneNumInfo> items = new ArrayList<PhoneNumInfo>();
+    public static ArrayList<PhoneNumInfo> items = new ArrayList<PhoneNumInfo>();
 
     public void addItem(PhoneNumInfo item){
         if(!items.contains(item))

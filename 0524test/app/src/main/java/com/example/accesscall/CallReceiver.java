@@ -89,7 +89,7 @@ public class CallReceiver extends BroadcastReceiver {
 
                             if(adapter.phoneNumCheck(phone_number)){
                                 Toast.makeText(context, "안심 번호입니다.", Toast.LENGTH_LONG).show();
-                                return;
+                                //return;
                             }
                             //----
 

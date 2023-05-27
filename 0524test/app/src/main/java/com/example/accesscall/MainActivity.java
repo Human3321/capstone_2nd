@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     public void getCallLog(){
         adapter.newArray();
         StringBuffer buf = new StringBuffer();
-        Cursor cursor = managedQuery(CallLog.Calls.CONTENT_URI,null,null, null, null);
+        Cursor cursor = getContentResolver().query(CallLog.Calls.CONTENT_URI,null,null, null, null);
 //        Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,null, null, null);
         cursor.moveToFirst();
 
