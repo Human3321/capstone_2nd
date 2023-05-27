@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.CallLog;
+import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +25,11 @@ import android.widget.Toast;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
 
+import java.security.KeyRep;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements AutoPermissionsListener {
@@ -118,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 use_set = false;
 
             } else if (str_btn.equals("OFF")) { // 클릭 -> 실시간 탐지 ON
-
                 // + 휴대폰 권한 받아오기
                 onCheckPermission();
 
@@ -128,13 +132,10 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
                 // 어플 사용 설정 ON
                 use_set = true;
-
                 i++;
                 getCallLog();
-
             }
         });
-
     }
 
     // 어플 사용설정 최초 ON 에 한해서 권한을 받아옴
@@ -170,8 +171,8 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     public void getCallLog(){
         adapter.newArray();
         StringBuffer buf = new StringBuffer();
-        Cursor cursor = managedQuery(CallLog.Calls.CONTENT_URI,null,null, null, null);
-//        Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,null, null, null);
+        Cursor cursor = getContentResolver().query(CallLog.Calls.CONTENT_URI,null,null, null, null);
+        //Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,null, null, null);
         cursor.moveToFirst();
 
         int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
@@ -181,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         while (cursor.moveToNext()) {
             String callname = cursor.getString(name);
             String phoneNum = cursor.getString(number);
-            phoneNum = PhoneNumberUtils.formatNumber(phoneNum);
+            phoneNum = PhoneNumberUtils.formatNumber(phoneNum, "KR");
             String callDate = cursor.getString(date);
             Date callDayTime = new Date(Long.valueOf(callDate));
             Date now = new Date();
@@ -199,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         cursor.close();
 
         // 로드 테스트용 코드
-        Toast.makeText(this, "안심번호 로드 "+adapter.items.get(i).getName()+adapter.items.get(i).getPhoneNumber(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "안심번호 로드 "+adapter.items.get(i).getName()+adapter.items.get(i).getPhoneNumber(), Toast.LENGTH_LONG).show();
     }
 
     @Override

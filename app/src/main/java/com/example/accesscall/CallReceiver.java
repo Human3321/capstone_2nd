@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -50,6 +51,20 @@ public class CallReceiver extends BroadcastReceiver {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("MissingPermission")
 
+//    public boolean newPhoneNumCheck(String phoneNum){
+//        Log.d("phoneNumCheck","phoneNumCheck호출");
+//        boolean flag = false;
+//        for(int i = 0; i < adapter.items.size(); i++){
+//            PhoneNumInfo info = adapter.items.get(i);
+//            Log.d("check","item:"+info.getName()+"/"+info.getPhoneNumber()+"phoneNum:"+phoneNum);
+//            if(info.getPhoneNumber().equals(phoneNum)){
+//                flag = true;
+//                return flag;
+//            }
+//        }
+//        return flag;
+//    }
+
     @Override
     public void onReceive(Context context, Intent intent) {
         // 진동 설정
@@ -77,17 +92,20 @@ public class CallReceiver extends BroadcastReceiver {
                             // 수신 번호 가져옴
                             phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
                             phoneNumtoReport = phone;
-
+                            Log.d("phone","phone:"+phone.toString());
                             // 안심번호 판별을 위해 추가----
                             String phone_number = PhoneNumberUtils.formatNumber(phone);
+                            phone_number = PhoneNumberUtils.formatNumber(phone_number, "KR");
+                            Log.d("phoneNum","phone_number:"+phone_number);
 
                             if(adapter.phoneNumCheck(phone_number)){
                                 Toast.makeText(context, "안심 번호입니다.", Toast.LENGTH_LONG).show();
                                 return;
                             }
                             //----
-
+                            Toast.makeText(context, "깨끗", Toast.LENGTH_LONG).show();
                             // 서버에 수신 전화번호 보내서 결과 받아옴
+
                             try {
                                 gPHP = new GettingPHP();
                                 result = gPHP.execute(url + phone).get();
@@ -103,6 +121,7 @@ public class CallReceiver extends BroadcastReceiver {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+
                         }
                     }
                 }
@@ -120,7 +139,7 @@ public class CallReceiver extends BroadcastReceiver {
                         }
                         //----
 
-                        Toast.makeText(context, "보이스피싱 의심 전화입니다 !", Toast.LENGTH_LONG).show();
+                       //Toast.makeText(context, "보이스피싱 전화입니다 !", Toast.LENGTH_LONG).show();
 
                         // 소켓 통신 스레드
                         Thread t = new Thread(() -> {
