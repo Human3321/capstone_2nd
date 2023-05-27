@@ -13,7 +13,9 @@ import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -80,6 +82,13 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     // STT Recognizer 선언
     SpeechRecognizer speechRecognizer;
 
+    // sharepref
+    String state;
+    String vibState;
+
+    Button btn_set_use, btn_set_vib, btn_set_vib_txt;
+    TextView txt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,9 +114,9 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                     }
                 });
 
-        Button btn_set_use = (Button) findViewById(R.id.btn_set_use); // 어플 사용 설정 버튼
-        Button btn_set_vib = (Button) findViewById(R.id.btn_set_vibration); // 진동 알림 설정 버튼
-        Button btn_set_vib_txt = (Button) findViewById(R.id.btn_set_vibration_txt); // 진동 알림 설정 버튼 껍데기
+        btn_set_use = (Button) findViewById(R.id.btn_set_use); // 어플 사용 설정 버튼
+        btn_set_vib = (Button) findViewById(R.id.btn_set_vibration); // 진동 알림 설정 버튼
+        btn_set_vib_txt = (Button) findViewById(R.id.btn_set_vibration_txt); // 진동 알림 설정 버튼 껍데기
 
         adapter = new PhoneNumInfoAdapter();
 
@@ -123,6 +132,8 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
                 // 진동알림 ON -> OFF
                 if (str_btn_vib.equals("ON")) {
+                    vibState ="OFF";
+
                     btn_set_vib.setText("OFF");
 
                     // 버튼 클릭시 애니메이션
@@ -135,10 +146,11 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
                     // 알림 진동 설정 끔
                     vib_mode = false;
-
                 }
                 // 진동알림 OFF -> ON
                 else if (str_btn_vib.equals("OFF")) {
+                    vibState ="ON";
+
                     btn_set_vib.setText("ON");
 
                     // 버튼 클릭시 애니메이션
@@ -159,9 +171,11 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         btn_set_use.setOnClickListener(view -> {
 
             String str_btn = btn_set_use.getText().toString(); // 어플 설정 버튼의 텍스트
-            TextView txt = findViewById(R.id.textView); // 어플 설정 버튼 밑 텍스트뷰
+            txt = findViewById(R.id.textView); // 어플 설정 버튼 밑 텍스트뷰
 
             if (str_btn.equals("ON")) { // 클릭 -> 실시간 탐지 OFF
+                // 껏다 켜도 상태 저장 용도
+                state ="OFF";
 
                 // 버튼 및 텍스트 뷰의 텍스트 변경
                 btn_set_use.setText("OFF");
@@ -173,6 +187,8 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 // 구 팝업창 제거
                 //stopService(new Intent(MainActivity.this, AlertWindow.class));
             } else if (str_btn.equals("OFF")) { // 클릭 -> 실시간 탐지 ON
+                // 껏다 켜도 상태 저장 용도
+                state ="ON";
 
                 // 팝업창 권한
                 onCheckPermission();
@@ -201,6 +217,101 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     }
 
     /* 팝업창 관련 함수 */
+
+    private void saveState(){
+        SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("state", state);
+        editor.putString("vibState", vibState);
+        editor.commit();
+        Log.d("tag","저장됨"+state);
+        Log.d("tag","저장됨"+vibState);
+    }
+
+    private void loadState(){
+        SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        state = pref.getString("state",null);
+        vibState = pref.getString("vibState", null);
+        Log.d("tag","로드-"+state);
+        Log.d("tag","로드-"+vibState);
+
+        if(state != null){
+            if(state.contains("ON")){
+                onCheckPermission();
+                btn_set_use = (Button) findViewById(R.id.btn_set_use);
+                txt = findViewById(R.id.textView);
+                btn_set_use.setText("ON");
+                txt.setText("보이스피싱 탐지중입니다.");
+
+                use_set = true;
+
+                getCallLog();
+            }
+            else if(state.contains("OFF")){
+                btn_set_use = (Button) findViewById(R.id.btn_set_use);
+                txt = findViewById(R.id.textView);
+                btn_set_use.setText("OFF");
+                txt.setText("보이스피싱 탐지 기능이 꺼졌습니다.");
+
+                use_set = false;
+            }
+        }
+
+        if(vibState != null){
+            if(vibState.contains("ON")){
+                btn_set_vib = findViewById(R.id.btn_set_vibration);
+                btn_set_vib.setText("ON");
+
+                // 버튼 클릭시 애니메이션
+                ValueAnimator animator2 = ObjectAnimator.ofFloat(btn_set_vib, "translationX", 100f, 150f, 0f);
+                ValueAnimator animator4 = ObjectAnimator.ofFloat(btn_set_vib_txt, "translationX", 100f, 150f, 0f);
+                animator2.setDuration(animationDuration);
+                animator4.setDuration(animationDuration);
+                animator2.start();
+                animator4.start();
+
+                // 알림 진동 설정 켬
+                vib_mode = true;
+            }
+            else if(vibState.contains("OFF")){
+                btn_set_vib = findViewById(R.id.btn_set_vibration);
+                btn_set_vib.setText("OFF");
+
+                // 버튼 클릭시 애니메이션
+                ValueAnimator animator1 = ObjectAnimator.ofFloat(btn_set_vib, "translationX", 100f, 150f, 0f); // values 수정 필요
+                ValueAnimator animator3 = ObjectAnimator.ofFloat(btn_set_vib_txt, "translationX", 100f, 150f, 0f);
+                animator1.setDuration(animationDuration);
+                animator3.setDuration(animationDuration);
+                animator1.start();
+                animator3.start();
+
+                // 알림 진동 설정 끔
+                vib_mode = false;
+            }
+        }
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("tag","onPause 호출됨");
+        saveState();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("tag","onResume 호출됨");
+        loadState();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("tag","onDestroy 호출됨");
+        saveState();
+    }
 
     void onCheckPermission() {
         //팝업창 권한 처리
