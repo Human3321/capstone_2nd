@@ -51,7 +51,8 @@ public class PhoneNumInfoAdapter extends RecyclerView.Adapter<PhoneNumInfoAdapte
         PhoneNumInfo item = items.get(position);
         holder.setItem(item);
     }
-
+//
+    //
     @Override
     public int getItemCount() {
         return items.size();
