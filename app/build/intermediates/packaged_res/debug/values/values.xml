@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="accessibility_service_description">통화 중 사용자를 보이스피싱 위협으로부터 보호하기 위해 음성 데이터에 접근합니다.</string>
+    <string name="accessibility_service_name">다잡아</string>
+    <string name="app_name">다잡아</string>
+    <string name="default_web_client_id" translatable="false">495315167080-bo81ci15ujm0147uc15vchr9crpr24ch.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">495315167080</string>
+    <string name="google_api_key" translatable="false">AIzaSyAl4yxPqfwfTHbGi2FmVntKwIh6GrWoBzU</string>
+    <string name="google_app_id" translatable="false">1:495315167080:android:c6a328288696c92b80d8dd</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAl4yxPqfwfTHbGi2FmVntKwIh6GrWoBzU</string>
+    <string name="google_storage_bucket" translatable="false">accesscall-97c9e.appspot.com</string>
+    <string name="project_id" translatable="false">accesscall-97c9e</string>
+    <style name="Theme.AccessCall" parent="Theme.AppCompat.Light">
+        
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        
+    </style>
+</resources>
