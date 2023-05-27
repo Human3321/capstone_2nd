@@ -4,6 +4,10 @@
         "source": "com.example.accesscall.app-main-41:/xml/accessibility_service_config.xml"
     },
     {
+        "merged": "com.example.accesscall.app-merged_res-39:/drawable_close.png.flat",
+        "source": "com.example.accesscall.app-main-41:/drawable/close.png"
+    },
+    {
         "merged": "com.example.accesscall.app-merged_res-39:/drawable_ic_launcher_background.xml.flat",
         "source": "com.example.accesscall.app-main-41:/drawable/ic_launcher_background.xml"
     },
@@ -22,6 +26,14 @@
     {
         "merged": "com.example.accesscall.app-merged_res-39:/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "com.example.accesscall.app-main-41:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-39:/layout_view_in_service.xml.flat",
+        "source": "com.example.accesscall.app-main-41:/layout/view_in_service.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-39:/drawable_alarm.png.flat",
+        "source": "com.example.accesscall.app-main-41:/drawable/alarm.png"
     },
     {
         "merged": "com.example.accesscall.app-merged_res-39:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
@@ -70,6 +82,10 @@
     {
         "merged": "com.example.accesscall.app-merged_res-39:/drawable-xxhdpi_ic_stat_notification.png.flat",
         "source": "com.example.accesscall.app-main-41:/drawable-xxhdpi/ic_stat_notification.png"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-39:/drawable_checked.png.flat",
+        "source": "com.example.accesscall.app-main-41:/drawable/checked.png"
     },
     {
         "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xxhdpi_ic_launcher_round.webp.flat",

@@ -2579,6 +2579,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable alarm
 drawable avd_hide_password
 drawable avd_show_password
 drawable btn_checkbox_checked_mtrl
@@ -2590,6 +2591,8 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable checked
+drawable close
 drawable collapse
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
@@ -2954,6 +2957,7 @@ id imageView
 id image_content_root
 id image_root
 id image_view
+id img
 id immediateStop
 id included
 id indeterminate
@@ -3200,6 +3204,8 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tv_number
+id tv_result
 id unchecked
 id uniform
 id unlabeled
@@ -3441,6 +3447,7 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 layout telinfo_item
+layout view_in_service
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description

@@ -55,6 +55,12 @@
         </activity>
 
         <service
+            android:name=".AlertWindow"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+        <service
             android:name=".AccessivilityTest"
             android:label="@string/accessibility_service_name"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"

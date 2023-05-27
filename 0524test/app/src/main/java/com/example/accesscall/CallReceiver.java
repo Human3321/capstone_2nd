@@ -54,6 +54,9 @@ public class CallReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        //구 팝업창 관련 처리. 다른 기능 완성 후에도 팝업창 생성에 문제 없으면 제거해도 OK
+        //AlertWindow alertWindow = (AlertWindow) context;
+        //alertWindow.setOverlayVisibility(View.VISIBLE);
 
         // 진동 설정
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
@@ -99,9 +102,23 @@ public class CallReceiver extends BroadcastReceiver {
                                     String split[] = full.split(":");
                                     String s = split[1];
                                     String s1[] = s.split("]");
-                                    Toast.makeText(context, "주의! 신고 {" + s1[0] + "회 누적된 번호입니다.", Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(context, "주의! 신고 {" + s1[0] + "회 누적된 번호입니다.", Toast.LENGTH_LONG).show();
+
+                                    //1차 판별 팝업창 생성
+                                    Intent serviceIntent = new Intent(context, AlertWindow.class);
+                                    serviceIntent.putExtra(AlertWindow.Number, phone_number);
+                                    serviceIntent.putExtra(AlertWindow.isWarning, "주의");
+                                    serviceIntent.putExtra(AlertWindow.Count, s1[0]);
+                                    context.startService(serviceIntent);
                                 } else {
-                                    Toast.makeText(context, "깨끗", Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(context, "깨끗", Toast.LENGTH_LONG).show();
+
+                                    //1차 판별 팝업창 생성
+                                    Intent serviceIntent = new Intent(context, AlertWindow.class);
+                                    serviceIntent.putExtra(AlertWindow.Number, phone_number);
+                                    serviceIntent.putExtra(AlertWindow.isWarning, "깨끗");
+                                    serviceIntent.putExtra(AlertWindow.Count, "0");
+                                    context.startService(serviceIntent);
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();

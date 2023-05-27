@@ -12,12 +12,15 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.CallLog;
+import android.provider.Settings;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -47,6 +50,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity implements AutoPermissionsListener {
+    private static final int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 1; //다른 앱 위에 그리기(팝업창)
     private static MainActivity instance;
 
     public static MainActivity getInstance() {
@@ -166,12 +170,17 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 // 어플 사용 설정 OFF
                 use_set = false;
 
+                // 구 팝업창 제거
+                //stopService(new Intent(MainActivity.this, AlertWindow.class));
             } else if (str_btn.equals("OFF")) { // 클릭 -> 실시간 탐지 ON
 
-                // 권한
+                // 팝업창 권한
+                onCheckPermission();
+
                 // 버튼 및 텍스트 뷰의 텍스트 변경
                 btn_set_use.setText("ON");
                 txt.setText("보이스피싱 탐지중입니다.");
+
                 // 어플 사용 설정 ON
                 use_set = true;
 
@@ -191,6 +200,81 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         } //RequestQueue 생성
     }
 
+    /* 팝업창 관련 함수 */
+
+    void onCheckPermission() {
+        //팝업창 권한 처리
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {   // 마시멜로우 이상일 경우
+            if (!Settings.canDrawOverlays(this)) {              // 체크
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE);
+            } else {
+                //startService(new Intent(MainActivity.this, AlertWindow.class));
+            }
+        } else {
+            //startService(new Intent(MainActivity.this, AlertWindow.class));
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //이 함수는 없어도 괜찮을듯? 모르겠음.. 주석 처리 후 테스트해보고 문제 없으면 폐기해도 OK
+        //폐기할 때는 제일 첫 문단 변수도 제거할 것.
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE) {
+            if (!Settings.canDrawOverlays(this)) {
+                // TODO 동의를 얻지 못했을 경우의 처리
+
+            }
+            else {
+                //startService(new Intent(MainActivity.this, AlertWindow.class));
+            }
+        }
+    }
+
+    /* 구 팝업창 생성 관련 함수. 만약을 대비해서 주석 처리. 다른 기능들도 완성 이후에도 팝업창 생성에 문제가 없으면 제거할 것... */
+
+    /*
+    // 서비스로부터 윈도우 오버레이 가시성 변경을 위한 메서드 호출
+    public void setOverlayVisibility(int visibility) {
+        if (alertWindow != null) {
+            alertWindow.setOverlayVisibility(visibility);
+        }
+    }
+
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            AlertWindow.LocalBinder binder = (AlertWindow.LocalBinder) service;
+            alertWindow = binder.getService();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            alertWindow = null;
+        }
+    };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // 서비스와의 연결
+        Intent intent = new Intent(this, AlertWindow.class);
+        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // 서비스와의 연결 해제
+        unbindService(serviceConnection);
+    }
+    */
+
+    /* 팝업창 관련 함수들... END */
+
     // 최초 1회만 뜨기
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -205,6 +289,8 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 break;
         }
     }
+
+
 
     public void getCallLog(){
         adapter.newArray();
