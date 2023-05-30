@@ -150,7 +150,7 @@ public class CallReceiver extends BroadcastReceiver {
                         }
 
                         MainActivity activity = MainActivity.getInstance();
-                        activity.StartRecord();
+//                        activity.StartRecord();
 
                         // Todo: 제대로 작동하는지 확인해봐야함!
                         if(sttManager.isVP == 1){

@@ -4,9 +4,6 @@
             "outputFile": "com.example.accesscall.app-mergeDebugResources-37:/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
-<<<<<<< HEAD
-                    "source": "C:\\Users\\gram\\.gradle\\caches\\transforms-3\\7c47583eaa49a8f04cbbdb1efc87e97c\\transformed\\material-1.7.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-=======
                     "source": "C:\\Users\\jinhe\\.gradle\\caches\\transforms-3\\c3184df9b48526500825bf066fb334e4\\transformed\\jetified-firebase-inappmessaging-display-20.3.2\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3",
@@ -25,7 +22,6 @@
                 },
                 {
                     "source": "C:\\Users\\jinhe\\.gradle\\caches\\transforms-3\\7c47583eaa49a8f04cbbdb1efc87e97c\\transformed\\material-1.7.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
->>>>>>> 9c3ae798545f2ea3b2753c70f0d677eaa9986853
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,10,11,12,13,14",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
@@ -44,11 +40,7 @@
                     }
                 },
                 {
-<<<<<<< HEAD
-                    "source": "C:\\Users\\gram\\.gradle\\caches\\transforms-3\\f49d1d9353271fb013d890a27fb35abb\\transformed\\appcompat-1.5.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-=======
                     "source": "C:\\Users\\jinhe\\.gradle\\caches\\transforms-3\\f49d1d9353271fb013d890a27fb35abb\\transformed\\appcompat-1.5.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
->>>>>>> 9c3ae798545f2ea3b2753c70f0d677eaa9986853
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -56,26 +48,6 @@
                         "endColumns": "68,68,69,73,75,58,70,67",
                         "endOffsets": "119,188,258,332,408,467,538,606"
                     }
-<<<<<<< HEAD
-                },
-                {
-                    "source": "C:\\Users\\gram\\.gradle\\caches\\transforms-3\\c3184df9b48526500825bf066fb334e4\\transformed\\jetified-firebase-inappmessaging-display-20.3.2\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,128",
-                        "endColumns": "72,71",
-                        "endOffsets": "123,195"
-                    },
-                    "to": {
-                        "startLines": "19,20",
-                        "startColumns": "4,4",
-                        "startOffsets": "1173,1246",
-                        "endColumns": "72,71",
-                        "endOffsets": "1241,1313"
-                    }
-=======
->>>>>>> 9c3ae798545f2ea3b2753c70f0d677eaa9986853
                 }
             ]
         }

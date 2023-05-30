@@ -4,11 +4,7 @@
             "outputFile": "com.example.accesscall.app-mergeDebugResources-37:/values-large-v4/values-large-v4.xml",
             "map": [
                 {
-<<<<<<< HEAD
-                    "source": "C:\\Users\\gram\\.gradle\\caches\\transforms-3\\f49d1d9353271fb013d890a27fb35abb\\transformed\\appcompat-1.5.1\\res\\values-large-v4\\values-large-v4.xml",
-=======
                     "source": "C:\\Users\\jinhe\\.gradle\\caches\\transforms-3\\f49d1d9353271fb013d890a27fb35abb\\transformed\\appcompat-1.5.1\\res\\values-large-v4\\values-large-v4.xml",
->>>>>>> 9c3ae798545f2ea3b2753c70f0d677eaa9986853
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
@@ -18,11 +14,7 @@
                     }
                 },
                 {
-<<<<<<< HEAD
-                    "source": "C:\\Users\\gram\\.gradle\\caches\\transforms-3\\7c47583eaa49a8f04cbbdb1efc87e97c\\transformed\\material-1.7.0\\res\\values-large-v4\\values-large-v4.xml",
-=======
                     "source": "C:\\Users\\jinhe\\.gradle\\caches\\transforms-3\\7c47583eaa49a8f04cbbdb1efc87e97c\\transformed\\material-1.7.0\\res\\values-large-v4\\values-large-v4.xml",
->>>>>>> 9c3ae798545f2ea3b2753c70f0d677eaa9986853
                     "from": {
                         "startLines": "2,3,4,10",
                         "startColumns": "4,4,4,4",
