@@ -2705,6 +2705,9 @@ drawable notify_panel_notification_icon_bg
 drawable on_off_background
 drawable on_off_button
 drawable roundbtn
+drawable roundbtn_list_off
+drawable roundbtn_list_on
+drawable roundbtn_middle
 drawable roundbtn_off
 drawable roundbtn_on
 drawable roundbtn_stroke
@@ -2829,9 +2832,7 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id btn
 id btn_set_use
-id btn_set_use_background
 id btn_set_vibration
-id btn_set_vibration_txt
 id button
 id buttonPanel
 id cache_measures
@@ -2876,6 +2877,7 @@ id currentState
 id custom
 id customPanel
 id cut
+id cv
 id dark
 id date_picker_actions
 id decelerate
@@ -2974,6 +2976,7 @@ id invisible
 id inward
 id italic
 id item_touch_helper_previous_elevation
+id iv_set_use
 id iv_set_vibration
 id iv_title
 id jumpToEnd
@@ -3216,7 +3219,9 @@ id transition_transform
 id triangle
 id tv_number
 id tv_result
-id tv_set_use
+id tv_set_use1
+id tv_set_use2
+id tv_set_vibration
 id tv_status
 id tv_title
 id unchecked
@@ -3367,7 +3372,6 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
-layout activity_main_new
 layout banner
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row

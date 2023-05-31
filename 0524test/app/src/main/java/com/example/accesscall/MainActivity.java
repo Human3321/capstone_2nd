@@ -18,9 +18,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.drawable.AnimationDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.provider.CallLog;
 import android.provider.Settings;
 import android.speech.RecognitionListener;
@@ -28,8 +32,11 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.telephony.PhoneNumberUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +46,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.protobuf.Value;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
 
@@ -50,6 +58,8 @@ import java.util.concurrent.TimeUnit;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements AutoPermissionsListener {
     private static final int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 1; //다른 앱 위에 그리기(팝업창)
@@ -86,8 +96,10 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     String state;
     String vibState;
 
-    Button btn_set_use, btn_set_vib, btn_set_vib_txt;
-    TextView txt;
+    ImageView iv_title, iv_set_use; // 어플 설정 On/Off 버튼 위 이미지, On/Off 버튼 배경
+    Button btn_set_use; // 어플 설정 On/Off 버튼
+    ImageButton btn_set_vibration;  // 진동 설정 버튼
+    TextView tv_set_vibration, tv_status;   // On/Off 버튼 배경 텍스트, 진동 설정 텍스트, 어플 설정 텍스트
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,9 +126,13 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                     }
                 });
 
-        btn_set_use = (Button) findViewById(R.id.btn_set_use); // 어플 사용 설정 버튼
-        btn_set_vib = (Button) findViewById(R.id.btn_set_vibration); // 진동 알림 설정 버튼
-        btn_set_vib_txt = (Button) findViewById(R.id.btn_set_vibration_txt); // 진동 알림 설정 버튼 껍데기
+        iv_title = (ImageView) findViewById(R.id.iv_title); //어플 사용 설정 버튼 위 이미지
+        btn_set_use = (Button) findViewById(R.id.btn_set_use);  // 어플 사용 설정 버튼
+        iv_set_use = (ImageView) findViewById(R.id.iv_set_use);    //어플 사용 설정 버튼 배경
+        tv_status = (TextView) findViewById(R.id.tv_status);    //어플 사용 설정 상태 텍스트
+
+        btn_set_vibration = (ImageButton) findViewById(R.id.btn_set_vibration); //진동 설정 버튼
+        tv_set_vibration = (TextView) findViewById(R.id.tv_set_vibration);  //진동 설정 텍스트
 
         adapter = new PhoneNumInfoAdapter();
 
@@ -124,25 +140,29 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         getCallLog();
 
         // 진동 알림 설정 버튼 리스너
-        btn_set_vib.setOnClickListener(new View.OnClickListener() {
+        btn_set_vibration.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                String str_btn_vib = btn_set_vib.getText().toString(); // 진동 알림 설정 버튼의 텍스트 변경
+                String str_btn_vib = tv_set_vibration.getText().toString(); // 진동 알림 설정 텍스트 변경
 
                 // 진동알림 ON -> OFF
                 if (str_btn_vib.equals("ON")) {
                     vibState ="OFF";
 
-                    btn_set_vib.setText("OFF");
+                    // 진동 설정 버튼과 텍스트 변경
+                    tv_set_vibration.setText("OFF");
+                    btn_set_vibration.setImageResource(R.drawable.vibration_off);
 
                     // 버튼 클릭시 애니메이션
+                    /*
                     ValueAnimator animator1 = ObjectAnimator.ofFloat(btn_set_vib, "translationX", 100f, 150f, 0f); // values 수정 필요
                     ValueAnimator animator3 = ObjectAnimator.ofFloat(btn_set_vib_txt, "translationX", 100f, 150f, 0f);
                     animator1.setDuration(animationDuration);
                     animator3.setDuration(animationDuration);
                     animator1.start();
                     animator3.start();
+                    */
 
                     // 알림 진동 설정 끔
                     vib_mode = false;
@@ -151,35 +171,53 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 else if (str_btn_vib.equals("OFF")) {
                     vibState ="ON";
 
-                    btn_set_vib.setText("ON");
+                    // 진동 설정 버튼과 텍스트 변경
+                    tv_set_vibration.setText("ON");
+                    btn_set_vibration.setImageResource(R.drawable.vibration_on);
 
                     // 버튼 클릭시 애니메이션
+                    /*
                     ValueAnimator animator2 = ObjectAnimator.ofFloat(btn_set_vib, "translationX", 100f, 150f, 0f);
                     ValueAnimator animator4 = ObjectAnimator.ofFloat(btn_set_vib_txt, "translationX", 100f, 150f, 0f);
                     animator2.setDuration(animationDuration);
                     animator4.setDuration(animationDuration);
                     animator2.start();
                     animator4.start();
+                    */
 
                     // 알림 진동 설정 켬
                     vib_mode = true;
+
+                    // 1. Vibrator 객체 생성
+                    Vibrator vibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
+
+                    // 2. 진동 구현: 1000ms동안 100 강도의 진동
+                    vibrator.vibrate(VibrationEffect.createOneShot(1000,100));
                 }
             }
         });
 
         // 어플 설정 버튼 리스너
         btn_set_use.setOnClickListener(view -> {
-
             String str_btn = btn_set_use.getText().toString(); // 어플 설정 버튼의 텍스트
-            txt = findViewById(R.id.textView); // 어플 설정 버튼 밑 텍스트뷰
 
             if (str_btn.equals("ON")) { // 클릭 -> 실시간 탐지 OFF
                 // 껏다 켜도 상태 저장 용도
                 state ="OFF";
 
-                // 버튼 및 텍스트 뷰의 텍스트 변경
+                // 어플 설정 버튼 및 텍스트 변경
+                iv_title.setBackgroundResource(R.drawable.roundbtn_list_off);  //애니메이션 추가해야함
+                AnimationDrawable animationDrawable = (AnimationDrawable) iv_title.getBackground();
+                animationDrawable.setEnterFadeDuration(2000);
+                animationDrawable.setExitFadeDuration(2000);
+                animationDrawable.start();
+
+                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", 0);
+                animator_btn.setDuration(animationDuration);
+                animator_btn.start();
                 btn_set_use.setText("OFF");
-                txt.setText("보이스피싱 탐지 기능이 꺼졌습니다.");
+
+                tv_status.setText("보이스피싱 탐지 기능이 꺼졌습니다.");
 
                 // 어플 사용 설정 OFF
                 use_set = false;
@@ -193,16 +231,25 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 // 팝업창 권한
                 onCheckPermission();
 
-                // 버튼 및 텍스트 뷰의 텍스트 변경
+                // 어플 설정 버튼 및 텍스트 변경
+                iv_title.setBackgroundResource(R.drawable.roundbtn_list_on);  //애니메이션 추가해야함
+                AnimationDrawable animationDrawable = (AnimationDrawable) iv_title.getBackground();
+                animationDrawable.setEnterFadeDuration(2000);
+                animationDrawable.setExitFadeDuration(2000);
+                animationDrawable.start();
+
+                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", 350f);
+                animator_btn.setDuration(animationDuration);
+                animator_btn.start();
                 btn_set_use.setText("ON");
-                txt.setText("보이스피싱 탐지중입니다.");
+
+                tv_status.setText("보이스피싱 탐지 중입니다.");
 
                 // 어플 사용 설정 ON
                 use_set = true;
 
                 i++;
                 getCallLog();
-
             }
         });
 
@@ -215,8 +262,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             queue = Volley.newRequestQueue(getApplicationContext());
         } //RequestQueue 생성
     }
-
-    /* 팝업창 관련 함수 */
 
     private void saveState(){
         SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
@@ -235,55 +280,83 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         Log.d("tag","로드-"+state);
         Log.d("tag","로드-"+vibState);
 
-        if(state != null){
-            if(state.contains("ON")){
-                onCheckPermission();
-                btn_set_use = (Button) findViewById(R.id.btn_set_use);
-                txt = findViewById(R.id.textView);
-                btn_set_use.setText("ON");
-                txt.setText("보이스피싱 탐지중입니다.");
+        iv_title = (ImageView) findViewById(R.id.iv_title); //어플 사용 설정 버튼 위 이미지
+        btn_set_use = (Button) findViewById(R.id.btn_set_use);  // 어플 사용 설정 버튼
+        iv_set_use = (ImageView) findViewById(R.id.iv_set_use);    //어플 사용 설정 버튼 배경
+        tv_status = (TextView) findViewById(R.id.tv_status);    //어플 사용 설정 상태 텍스트
 
+        btn_set_vibration = (ImageButton) findViewById(R.id.btn_set_vibration); //진동 설정 버튼
+        tv_set_vibration = (TextView) findViewById(R.id.tv_set_vibration);  //진동 설정 텍스트
+
+        if(state != null){
+            if(state.contains("ON")){   // 저장된 어플 사용 설정이 ON이라면
+                // 팝업창 권한
+                onCheckPermission();
+
+                // 어플 설정 버튼 및 텍스트 변경
+                iv_title.setBackgroundResource(R.drawable.roundbtn_on);
+
+                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", 350f);
+                animator_btn.setDuration(animationDuration);
+                animator_btn.start();
+                btn_set_use.setText("ON");
+
+                tv_status.setText("보이스피싱 탐지 중입니다.");
+
+                // 어플 사용 설정 ON
                 use_set = true;
 
                 getCallLog();
             }
-            else if(state.contains("OFF")){
-                btn_set_use = (Button) findViewById(R.id.btn_set_use);
-                txt = findViewById(R.id.textView);
-                btn_set_use.setText("OFF");
-                txt.setText("보이스피싱 탐지 기능이 꺼졌습니다.");
+            else if(state.contains("OFF")){ // 저장된 어플 사용 설정이 OFF라면
+                // 어플 설정 버튼 및 텍스트 변경
+                iv_title.setBackgroundResource(R.drawable.roundbtn_off);
 
+                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", 0);
+                animator_btn.setDuration(animationDuration);
+                animator_btn.start();
+                btn_set_use.setText("OFF");
+
+                tv_status.setText("보이스피싱 탐지 기능이 꺼졌습니다.");
+
+                // 어플 사용 설정 OFF
                 use_set = false;
             }
         }
 
         if(vibState != null){
             if(vibState.contains("ON")){
-                btn_set_vib = findViewById(R.id.btn_set_vibration);
-                btn_set_vib.setText("ON");
+                // 진동 설정 버튼과 텍스트 변경
+                tv_set_vibration.setText("ON");
+                btn_set_vibration.setImageResource(R.drawable.vibration_on);
 
                 // 버튼 클릭시 애니메이션
+                /*
                 ValueAnimator animator2 = ObjectAnimator.ofFloat(btn_set_vib, "translationX", 100f, 150f, 0f);
                 ValueAnimator animator4 = ObjectAnimator.ofFloat(btn_set_vib_txt, "translationX", 100f, 150f, 0f);
                 animator2.setDuration(animationDuration);
                 animator4.setDuration(animationDuration);
                 animator2.start();
                 animator4.start();
+                */
 
                 // 알림 진동 설정 켬
                 vib_mode = true;
             }
             else if(vibState.contains("OFF")){
-                btn_set_vib = findViewById(R.id.btn_set_vibration);
-                btn_set_vib.setText("OFF");
+                // 진동 설정 버튼과 텍스트 변경
+                tv_set_vibration.setText("OFF");
+                btn_set_vibration.setImageResource(R.drawable.vibration_off);
 
                 // 버튼 클릭시 애니메이션
+                /*
                 ValueAnimator animator1 = ObjectAnimator.ofFloat(btn_set_vib, "translationX", 100f, 150f, 0f); // values 수정 필요
                 ValueAnimator animator3 = ObjectAnimator.ofFloat(btn_set_vib_txt, "translationX", 100f, 150f, 0f);
                 animator1.setDuration(animationDuration);
                 animator3.setDuration(animationDuration);
                 animator1.start();
                 animator3.start();
+                */
 
                 // 알림 진동 설정 끔
                 vib_mode = false;
@@ -312,6 +385,8 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         Log.d("tag","onDestroy 호출됨");
         saveState();
     }
+
+    /* 팝업창 관련 함수들... */
 
     void onCheckPermission() {
         //팝업창 권한 처리
@@ -400,8 +475,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 break;
         }
     }
-
-
 
     public void getCallLog(){
         adapter.newArray();

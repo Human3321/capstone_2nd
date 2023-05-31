@@ -1,104 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btn_set_vibration_txt"
-        android:layout_width="330dp"
-        android:layout_height="85dp"
-        android:background="@drawable/little_round_btn"
-        android:text="진동 알림           "
-        android:textAlignment="center"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.862"
-        tools:ignore="MissingConstraints,RtlCompat" />
+    <ImageView
+        android:id="@+id/iv_title"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_gravity="center"
+        android:background="@drawable/roundbtn_off"
+        android:layout_marginTop="120dp"
+        android:layout_marginBottom="50dp"/>
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="271dp"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:text="보이스피싱 탐지 기능이 꺼졌습니다."
-        android:textColor="#494949"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn"
-        app:layout_constraintVertical_bias="0.093"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_title"
         android:layout_width="233dp"
         android:layout_height="46dp"
+        android:layout_gravity="center"
         android:gravity="center"
         android:text="다잡아"
         android:textColor="#494949"
         android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.052"
-        tools:ignore="MissingConstraints" />
+        android:layout_marginBottom="30dp"/>
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
-        android:background="@drawable/roundbtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.285" />
-
-
-    <Button
-        android:id="@+id/btn_set_vibration"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/roundbtn"
-        android:backgroundTint="@color/white"
-        android:text="ON"
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="271dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="보이스피싱 탐지 기능이 꺼졌습니다."
+        android:textColor="#494949"
         android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_set_vibration_txt"
-        app:layout_constraintEnd_toEndOf="@+id/btn_set_vibration_txt"
-        app:layout_constraintHorizontal_bias="0.948"
-        app:layout_constraintStart_toStartOf="@+id/btn_set_vibration_txt"
-        app:layout_constraintTop_toTopOf="@+id/btn_set_vibration_txt"
-        app:layout_constraintVertical_bias="0.466" />
+        android:layout_marginBottom="30dp"/>
 
+    <FrameLayout
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center">
 
-    <Button
-        android:id="@+id/btn_set_use"
-        android:layout_width="235dp"
-        android:layout_height="235dp"
-        android:background="@drawable/roundbtn_stroke"
-        android:text="OFF"
-        android:textColor="@color/white"
-        android:textSize="35dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btn"
-        app:layout_constraintEnd_toEndOf="@+id/btn"
-        app:layout_constraintHorizontal_bias="0.46"
-        app:layout_constraintStart_toStartOf="@+id/btn"
-        app:layout_constraintTop_toTopOf="@+id/btn"
-        app:layout_constraintVertical_bias="0.52"
-        tools:ignore="MissingConstraints" />
+        <ImageView
+            android:id="@+id/iv_set_use"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center|right"
+            android:src="@drawable/on_off_background" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_set_use1"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:gravity="center"
+            android:elevation="2dp"
+            android:text="OFF"
+            android:textSize="15dp"
+            android:textColor="#857C7C"/>
+
+        <TextView
+            android:id="@+id/tv_set_use2"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center|right"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:gravity="center"
+            android:elevation="2dp"
+            android:text="ON"
+            android:textSize="15dp"
+            android:textColor="#857C7C"/>
+
+        <Button
+            android:id="@+id/btn_set_use"
+            android:layout_width="150dp"
+            android:layout_height="52dp"
+            android:background="@drawable/on_off_button"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:elevation="8dp"
+            android:translationZ="4dp"
+            android:text="OFF"
+            android:textSize="15dp" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="45dp">
+
+        <ImageView
+            android:id="@+id/iv_set_vibration"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/vibration_button"
+            android:elevation="10dp"
+            android:translationZ="10dp" />
+
+        <ImageButton
+            android:id="@+id/btn_set_vibration"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="2dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/vibration_on"
+            android:background="@android:color/transparent"
+            android:elevation="15dp"
+            android:translationZ="11dp"/>
+
+        <TextView
+            android:id="@+id/tv_set_vibration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:text="ON"
+            android:textSize="10dp"
+            android:layout_marginBottom="5dp"
+            android:elevation="16dp"
+            android:translationZ="12dp" />
+
+    </FrameLayout>
+
+</LinearLayout>

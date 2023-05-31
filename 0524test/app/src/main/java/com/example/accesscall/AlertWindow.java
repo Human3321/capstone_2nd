@@ -17,6 +17,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
+
 //주석 처리된 코드는 구 팝업창
 
 public class AlertWindow extends Service {
@@ -41,6 +43,7 @@ public class AlertWindow extends Service {
     TextView tv_result;
     TextView tv_number;
     ImageButton btn;
+    CardView cv;
 
     WindowManager wm;
     View mView;
@@ -101,11 +104,13 @@ public class AlertWindow extends Service {
         if (isWarning.equals("깨끗")) {   //신고 이력이 없는 깨끗한 전화번호일 경우
             tv_result.setText("신고 이력이 없는 번호입니다.");  //결과 텍스트 변경
             tv_result.setTextColor(Color.parseColor("#157AC6"));    //결과 텍스트 색상 변경
+            cv.setCardBackgroundColor(Color.parseColor("#D5E8DF")); //카드뷰 색상 변경
             img.setImageResource(R.drawable.checked);   //체크 이미지로 변경
         }
         else if (isWarning.equals("주의")) {  //신고 이력이 있는 전화번호일 경우
             tv_result.setText("주의! 신고 " + Count + "회 누적된 번호입니다.");  //결과 텍스트 변경
             tv_result.setTextColor(Color.parseColor("#9A1E1E"));  //결과 텍스트 색상 변경
+            cv.setCardBackgroundColor(Color.parseColor("#EAC5C5")); //카드뷰 색상 변경
             img.setImageResource(R.drawable.alarm);   //경고 이미지로 변경
         }
         else {
@@ -137,7 +142,8 @@ public class AlertWindow extends Service {
         img = (ImageView) mView.findViewById(R.id.img);
         tv_result = (TextView) mView.findViewById(R.id.tv_result);
         tv_number = (TextView) mView.findViewById(R.id.tv_number);
-        btn =  (ImageButton) mView.findViewById(R.id.btn);
+        btn = (ImageButton) mView.findViewById(R.id.btn);
+        cv = (CardView) mView.findViewById(R.id.cv);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

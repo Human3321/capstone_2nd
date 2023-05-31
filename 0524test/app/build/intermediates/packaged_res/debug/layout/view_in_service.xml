@@ -6,9 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="#FFFFFF"
+        app:cardBackgroundColor="#EAC5C5"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:cardUseCompatPadding="true">
@@ -20,8 +21,8 @@
 
             <ImageView
                 android:id="@+id/img"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/alarm"
                 android:background="@android:color/transparent"
@@ -40,7 +41,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:text="보이스피싱으로 탐지되었습니다!"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textColor="#9A1E1E"
                     android:textStyle="bold"
                     android:layout_marginBottom="5dp"
@@ -53,8 +54,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:text="010-3340-9599"
-                    android:textSize="15sp" />
+                    android:text="010-XXXX-XXXX"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -69,7 +70,7 @@
                     android:layout_height="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="70dp"
+                    android:layout_marginBottom="50dp"
                     android:background="@android:color/transparent"
                     android:scaleType="fitXY"
                     android:src="@drawable/close"
