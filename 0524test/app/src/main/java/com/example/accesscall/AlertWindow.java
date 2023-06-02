@@ -120,7 +120,13 @@ public class AlertWindow extends Service {
             img.setImageResource(R.drawable.alarm);   //경고 이미지로 변경
         }
         else if (isWarning.equals("피싱")) {  //2차 판별 피싱 내용이 감지되었다면
-            tv_result.setText("경고! 보이스피싱으로 탐지되었습니다!");  //결과 텍스트 변경
+            tv_result.setText("경고! 보이스피싱으로 탐지되었습니다.");  //결과 텍스트 변경
+            tv_result.setTextColor(Color.parseColor("#9A1E1E"));  //결과 텍스트 색상 변경
+            cv.setCardBackgroundColor(Color.parseColor("#EAC5C5")); //카드뷰 색상 변경
+            img.setImageResource(R.drawable.alarm);   //경고 이미지로 변경
+        }
+        else if (isWarning.equals("신고")) {  //2차 판별 피싱 내용이 감지되었다면
+            tv_result.setText("경고! 보이스피싱으로 서버에 자동 신고되었습니다.");  //결과 텍스트 변경
             tv_result.setTextColor(Color.parseColor("#9A1E1E"));  //결과 텍스트 색상 변경
             cv.setCardBackgroundColor(Color.parseColor("#EAC5C5")); //카드뷰 색상 변경
             img.setImageResource(R.drawable.alarm);   //경고 이미지로 변경
