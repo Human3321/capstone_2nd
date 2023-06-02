@@ -113,8 +113,11 @@ public class AlertWindow extends Service {
             cv.setCardBackgroundColor(Color.parseColor("#EAC5C5")); //카드뷰 색상 변경
             img.setImageResource(R.drawable.alarm);   //경고 이미지로 변경
         }
-        else {
-
+        else {  //피싱 내용이 감지되었다면
+            tv_result.setText("경고! 보이스피싱으로 탐지되었습니다!");  //결과 텍스트 변경
+            tv_result.setTextColor(Color.parseColor("#9A1E1E"));  //결과 텍스트 색상 변경
+            cv.setCardBackgroundColor(Color.parseColor("#EAC5C5")); //카드뷰 색상 변경
+            img.setImageResource(R.drawable.alarm);   //경고 이미지로 변경
         }
 
         return super.onStartCommand(intent, flags, startId);
@@ -138,6 +141,7 @@ public class AlertWindow extends Service {
                 PixelFormat.TRANSLUCENT);
 
         params.gravity = Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL;
+        params.y = -150;
         mView = inflate.inflate(R.layout.view_in_service, null);
         img = (ImageView) mView.findViewById(R.id.img);
         tv_result = (TextView) mView.findViewById(R.id.tv_result);

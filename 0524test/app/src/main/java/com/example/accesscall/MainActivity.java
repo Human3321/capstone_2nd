@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     String state;
     String vibState;
 
+    ImageView iv_back;  //어플 배경
     ImageView iv_title, iv_set_use; // 어플 설정 On/Off 버튼 위 이미지, On/Off 버튼 배경
     Button btn_set_use; // 어플 설정 On/Off 버튼
     ImageButton btn_set_vibration;  // 진동 설정 버튼
@@ -125,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
                     }
                 });
+
+        iv_back = (ImageView) findViewById(R.id.iv_back); //어플 배경 이미지
 
         iv_title = (ImageView) findViewById(R.id.iv_title); //어플 사용 설정 버튼 위 이미지
         btn_set_use = (Button) findViewById(R.id.btn_set_use);  // 어플 사용 설정 버튼
@@ -205,8 +208,15 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 // 껏다 켜도 상태 저장 용도
                 state ="OFF";
 
+                //어플 배경 이미지 변경
+                iv_back.setBackgroundResource(R.drawable.roundbtn_back_list_off);
+                AnimationDrawable animationDrawable_back = (AnimationDrawable) iv_back.getBackground();
+                animationDrawable_back.setEnterFadeDuration(500);
+                animationDrawable_back.setExitFadeDuration(500);
+                animationDrawable_back.start();
+
                 // 어플 설정 버튼 및 텍스트 변경
-                iv_title.setBackgroundResource(R.drawable.roundbtn_list_off);  //애니메이션 추가해야함
+                iv_title.setBackgroundResource(R.drawable.roundbtn_list_off);
                 AnimationDrawable animationDrawable = (AnimationDrawable) iv_title.getBackground();
                 animationDrawable.setEnterFadeDuration(500);
                 animationDrawable.setExitFadeDuration(500);
@@ -230,6 +240,13 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
                 // 팝업창 권한
                 onCheckPermission();
+
+                //어플 배경 이미지 변경
+                iv_back.setBackgroundResource(R.drawable.roundbtn_back_list_on);
+                AnimationDrawable animationDrawable_back = (AnimationDrawable) iv_back.getBackground();
+                animationDrawable_back.setEnterFadeDuration(500);
+                animationDrawable_back.setExitFadeDuration(500);
+                animationDrawable_back.start();
 
                 // 어플 설정 버튼 및 텍스트 변경
                 iv_title.setBackgroundResource(R.drawable.roundbtn_list_on);  //애니메이션 추가해야함
@@ -298,6 +315,9 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 // 팝업창 권한
                 onCheckPermission();
 
+                //어플 배경 이미지 변경
+                iv_back.setBackgroundResource(R.drawable.roundbtn_back_on);
+
                 // 어플 설정 버튼 및 텍스트 변경
                 iv_title.setBackgroundResource(R.drawable.roundbtn_on);
 
@@ -319,6 +339,9 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 getCallLog();
             }
             else if(state.contains("OFF")){ // 저장된 어플 사용 설정이 OFF라면
+                //어플 배경 이미지 변경
+                iv_back.setBackgroundResource(R.drawable.roundbtn_back_off);
+
                 // 어플 설정 버튼 및 텍스트 변경
                 iv_title.setBackgroundResource(R.drawable.roundbtn_off);
 
