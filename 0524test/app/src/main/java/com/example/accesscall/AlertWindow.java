@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
+import android.speech.SpeechRecognizer;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -19,25 +21,12 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 
-//주석 처리된 코드는 구 팝업창
-
 public class AlertWindow extends Service {
-    //private MainActivity mainActivity;
-    //private ServiceConnection connection;
-
-    //서비스 바인더
-    /*
-    public class LocalBinder extends Binder {
-        AlertWindow getService() {
-            return AlertWindow.this;
-        }
-    }
-
-    private final IBinder binder = new LocalBinder();
-    */
     public static String isWarning = "1차 판별 결과";
     public static String Count = "신고 횟수";
     public static String Number = "전화 번호";
+
+    WindowManager.LayoutParams params;
 
     ImageView img;
     TextView tv_result;
@@ -51,48 +40,8 @@ public class AlertWindow extends Service {
     //@Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        //return binder;
         return null;
     }
-
-    /*
-    //MainActivity와 바인딩
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        bindToMainActivity();
-        return super.onStartCommand(intent, flags, startId);
-    }
-
-    private void bindToMainActivity() {
-        connection = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                LocalBinder binder = (LocalBinder) service;
-                AlertWindow.this.mainActivity = binder.getService().getMainActivity();
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-                AlertWindow.this.mainActivity = null;
-            }
-        };
-
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        bindService(intent, connection, Context.BIND_AUTO_CREATE);
-    }
-
-    // MainActivity의 setOverlayVisibility() 메서드를 호출하여 가시성 변경
-    public void setOverlayVisibility(int visibility) {
-        if (mainActivity != null) {
-            mainActivity.setOverlayVisibility(visibility);
-        }
-    }
-
-    // MainActivity 반환
-    public MainActivity getMainActivity() {
-        return mainActivity;
-    }
-    */
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -142,7 +91,7 @@ public class AlertWindow extends Service {
         LayoutInflater inflate = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
 
-        WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+        params = new WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 30, 30, // X, Y 좌표
@@ -168,6 +117,40 @@ public class AlertWindow extends Service {
             }
         });
         wm.addView(mView, params);
+
+        setDraggable();
+    }
+
+    void setDraggable() {
+        mView.setOnTouchListener(new View.OnTouchListener() {
+            private int initialX;
+            private int initialY;
+            private float initialTouchX;
+            private float initialTouchY;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:   //처음 팝업창을 눌렀을 때
+                        initialX = params.x;
+                        initialY = params.y;
+                        initialTouchX = event.getRawX();
+                        initialTouchY = event.getRawY();
+                        return true;
+                    case MotionEvent.ACTION_UP: //팝업창을 누른걸 땠을 때
+                        return true;
+                    case MotionEvent.ACTION_MOVE:   //팝업창을 누르고 움직였을 때
+                        params.x = initialX + (int)(event.getRawX() - initialTouchX);
+                        params.y = initialY + (int)(event.getRawY() - initialTouchY);
+
+                        if (mView != null)
+                            wm.updateViewLayout(mView, params);
+                        return true;
+                }
+
+                return false;
+            }
+        });
     }
 
     @Override
@@ -181,7 +164,7 @@ public class AlertWindow extends Service {
             }
             wm = null;
         }
-
-        //unbindService(connection);
     }
+
+
 }

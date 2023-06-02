@@ -234,8 +234,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 // 어플 사용 설정 OFF
                 use_set = false;
 
-                // 구 팝업창 제거
-                //stopService(new Intent(MainActivity.this, AlertWindow.class));
             } else if (str_btn.equals("OFF")) { // 클릭 -> 실시간 탐지 ON
                 // 껏다 켜도 상태 저장 용도
                 state ="ON";
@@ -365,16 +363,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 tv_set_vibration.setText("ON");
                 btn_set_vibration.setImageResource(R.drawable.vibration_on);
 
-                // 버튼 클릭시 애니메이션
-                /*
-                ValueAnimator animator2 = ObjectAnimator.ofFloat(btn_set_vib, "translationX", 100f, 150f, 0f);
-                ValueAnimator animator4 = ObjectAnimator.ofFloat(btn_set_vib_txt, "translationX", 100f, 150f, 0f);
-                animator2.setDuration(animationDuration);
-                animator4.setDuration(animationDuration);
-                animator2.start();
-                animator4.start();
-                */
-
                 // 알림 진동 설정 켬
                 vib_mode = true;
             }
@@ -382,16 +370,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 // 진동 설정 버튼과 텍스트 변경
                 tv_set_vibration.setText("OFF");
                 btn_set_vibration.setImageResource(R.drawable.vibration_off);
-
-                // 버튼 클릭시 애니메이션
-                /*
-                ValueAnimator animator1 = ObjectAnimator.ofFloat(btn_set_vib, "translationX", 100f, 150f, 0f); // values 수정 필요
-                ValueAnimator animator3 = ObjectAnimator.ofFloat(btn_set_vib_txt, "translationX", 100f, 150f, 0f);
-                animator1.setDuration(animationDuration);
-                animator3.setDuration(animationDuration);
-                animator1.start();
-                animator3.start();
-                */
 
                 // 알림 진동 설정 끔
                 vib_mode = false;
@@ -421,7 +399,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         saveState();
     }
 
-    /* 팝업창 관련 함수들... */
+    /* 팝업창 관련 함수들.. */
 
     void onCheckPermission() {
         //팝업창 권한 처리
@@ -455,46 +433,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         }
     }
 
-    /* 구 팝업창 생성 관련 함수. 만약을 대비해서 주석 처리. 다른 기능들도 완성 이후에도 팝업창 생성에 문제가 없으면 제거할 것... */
-
-    /*
-    // 서비스로부터 윈도우 오버레이 가시성 변경을 위한 메서드 호출
-    public void setOverlayVisibility(int visibility) {
-        if (alertWindow != null) {
-            alertWindow.setOverlayVisibility(visibility);
-        }
-    }
-
-    private ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            AlertWindow.LocalBinder binder = (AlertWindow.LocalBinder) service;
-            alertWindow = binder.getService();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            alertWindow = null;
-        }
-    };
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // 서비스와의 연결
-        Intent intent = new Intent(this, AlertWindow.class);
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        // 서비스와의 연결 해제
-        unbindService(serviceConnection);
-    }
-    */
-
-    /* 팝업창 관련 함수들... END */
+    /* 팝업창 관련 함수들.. END */
 
     // 최초 1회만 뜨기
     @Override

@@ -20,6 +20,10 @@
         "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\roundbtn_off.xml"
     },
     {
+        "merged": "com.example.accesscall.app-merged_res-39:/layout_view_in_service.xml.flat",
+        "source": "com.example.accesscall.app-main-41:/layout/view_in_service.xml"
+    },
+    {
         "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_roundbtn_back_on.xml.flat",
         "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\roundbtn_back_on.xml"
     },
@@ -32,28 +36,24 @@
         "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable\\close.png"
     },
     {
-        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-xxhdpi_ic_stat_notification.png.flat",
-        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-xxhdpi\\ic_stat_notification.png"
-    },
-    {
         "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable_alarm.png.flat",
         "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable\\alarm.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/layout_activity_main.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/layout/activity_main.xml"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-xxhdpi_ic_stat_notification.png.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-xxhdpi\\ic_stat_notification.png"
     },
     {
         "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_roundbtn_stroke.xml.flat",
         "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\roundbtn_stroke.xml"
     },
     {
-        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-xxhdpi\\ic_launcher_round.webp"
-    },
-    {
         "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable_roundbtn_list_off.xml.flat",
         "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable\\roundbtn_list_off.xml"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_on_off_button.xml.flat",
