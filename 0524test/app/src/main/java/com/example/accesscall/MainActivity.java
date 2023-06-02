@@ -238,7 +238,12 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 animationDrawable.setExitFadeDuration(500);
                 animationDrawable.start();
 
-                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", 275f);
+                // 이동 거리 계산 (100dp를 픽셀로 변환)
+                float distanceInDp = 100f;
+                float scale = getResources().getDisplayMetrics().density;
+                int distanceInPixels = (int) (distanceInDp * scale + 0.5f);
+
+                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", distanceInPixels);
                 animator_btn.setDuration(animationDuration);
                 animator_btn.start();
                 btn_set_use.setText("ON");
@@ -296,7 +301,12 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 // 어플 설정 버튼 및 텍스트 변경
                 iv_title.setBackgroundResource(R.drawable.roundbtn_on);
 
-                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", 275f);
+                // 이동 거리 계산 (100dp를 픽셀로 변환)
+                float distanceInDp = 100f;
+                float scale = getResources().getDisplayMetrics().density;
+                int distanceInPixels = (int) (distanceInDp * scale + 0.5f);
+
+                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", distanceInPixels);
                 animator_btn.setDuration(animationDuration);
                 animator_btn.start();
                 btn_set_use.setText("ON");
