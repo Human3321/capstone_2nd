@@ -72,8 +72,14 @@ public class CallReceiver extends BroadcastReceiver {
             String phone_number = PhoneNumberUtils.formatNumber(phone);
 
             if(adapter.phoneNumCheck(phone_number)){
-                Toast.makeText(context, "안심 번호입니다.", Toast.LENGTH_LONG).show();
-                //return;
+                //안심 번호 팝업창 생성
+                Intent serviceIntent = new Intent(context, AlertWindow.class);
+                serviceIntent.putExtra(AlertWindow.Number, phone_number);
+                serviceIntent.putExtra(AlertWindow.isWarning, "안심");
+                serviceIntent.putExtra(AlertWindow.Count, "0");
+                context.startService(serviceIntent);
+
+                return;
             }
 
             // 서버에 수신 전화번호 보내서 결과 받아옴

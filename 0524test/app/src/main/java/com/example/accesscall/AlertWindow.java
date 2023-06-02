@@ -101,7 +101,13 @@ public class AlertWindow extends Service {
         Count = intent.getStringExtra(Count);
 
         tv_number.setText(Number);  //생성시 받아온 전화번호로 변경
-        if (isWarning.equals("깨끗")) {   //신고 이력이 없는 깨끗한 전화번호일 경우
+        if (isWarning.equals("안심")) {   //안심번호일 경우
+            tv_result.setText("안심 번호입니다.");  //결과 텍스트 변경
+            tv_result.setTextColor(Color.parseColor("#157AC6"));    //결과 텍스트 색상 변경
+            cv.setCardBackgroundColor(Color.parseColor("#D5E8DF")); //카드뷰 색상 변경
+            img.setImageResource(R.drawable.checked);   //체크 이미지로 변경
+        }
+        else if (isWarning.equals("깨끗")) {  //신고 이력이 없는 깨끗한 전화번호일 경우
             tv_result.setText("신고 이력이 없는 번호입니다.");  //결과 텍스트 변경
             tv_result.setTextColor(Color.parseColor("#157AC6"));    //결과 텍스트 색상 변경
             cv.setCardBackgroundColor(Color.parseColor("#D5E8DF")); //카드뷰 색상 변경
@@ -113,7 +119,7 @@ public class AlertWindow extends Service {
             cv.setCardBackgroundColor(Color.parseColor("#EAC5C5")); //카드뷰 색상 변경
             img.setImageResource(R.drawable.alarm);   //경고 이미지로 변경
         }
-        else {  //피싱 내용이 감지되었다면
+        else if (isWarning.equals("피싱")) {  //2차 판별 피싱 내용이 감지되었다면
             tv_result.setText("경고! 보이스피싱으로 탐지되었습니다!");  //결과 텍스트 변경
             tv_result.setTextColor(Color.parseColor("#9A1E1E"));  //결과 텍스트 색상 변경
             cv.setCardBackgroundColor(Color.parseColor("#EAC5C5")); //카드뷰 색상 변경

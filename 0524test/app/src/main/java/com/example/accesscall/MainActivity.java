@@ -16,6 +16,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.drawable.AnimationDrawable;
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);  //세로 고정
         instance = this;
         setContentView(R.layout.activity_main);
 
@@ -249,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 animationDrawable_back.start();
 
                 // 어플 설정 버튼 및 텍스트 변경
-                iv_title.setBackgroundResource(R.drawable.roundbtn_list_on);  //애니메이션 추가해야함
+                iv_title.setBackgroundResource(R.drawable.roundbtn_list_on);
                 AnimationDrawable animationDrawable = (AnimationDrawable) iv_title.getBackground();
                 animationDrawable.setEnterFadeDuration(500);
                 animationDrawable.setExitFadeDuration(500);
