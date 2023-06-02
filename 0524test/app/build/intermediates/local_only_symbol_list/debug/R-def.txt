@@ -30,6 +30,8 @@ id btn
 id btn_set_use
 id btn_set_vibration
 id cv
+id frameLayout
+id frameLayout2
 id imageView
 id img
 id iv_set_use
@@ -37,6 +39,7 @@ id iv_set_vibration
 id iv_title
 id textView
 id textView2
+id tv_info
 id tv_number
 id tv_result
 id tv_set_use1

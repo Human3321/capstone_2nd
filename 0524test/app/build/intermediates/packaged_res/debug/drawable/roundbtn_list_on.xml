@@ -4,13 +4,13 @@
 
     <item
         android:drawable="@drawable/roundbtn_off"
-        android:duration="2000" />
+        android:duration="500" />
 
     <item
         android:drawable="@drawable/roundbtn_middle"
-        android:duration="2000" />
+        android:duration="500" />
 
     <item
         android:drawable="@drawable/roundbtn_on"
-        android:duration="2000" />
+        android:duration="500" />
 </animation-list>

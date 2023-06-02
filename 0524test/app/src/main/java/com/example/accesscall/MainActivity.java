@@ -208,8 +208,8 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 // 어플 설정 버튼 및 텍스트 변경
                 iv_title.setBackgroundResource(R.drawable.roundbtn_list_off);  //애니메이션 추가해야함
                 AnimationDrawable animationDrawable = (AnimationDrawable) iv_title.getBackground();
-                animationDrawable.setEnterFadeDuration(2000);
-                animationDrawable.setExitFadeDuration(2000);
+                animationDrawable.setEnterFadeDuration(500);
+                animationDrawable.setExitFadeDuration(500);
                 animationDrawable.start();
 
                 ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", 0);
@@ -234,11 +234,11 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 // 어플 설정 버튼 및 텍스트 변경
                 iv_title.setBackgroundResource(R.drawable.roundbtn_list_on);  //애니메이션 추가해야함
                 AnimationDrawable animationDrawable = (AnimationDrawable) iv_title.getBackground();
-                animationDrawable.setEnterFadeDuration(2000);
-                animationDrawable.setExitFadeDuration(2000);
+                animationDrawable.setEnterFadeDuration(500);
+                animationDrawable.setExitFadeDuration(500);
                 animationDrawable.start();
 
-                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", 350f);
+                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", 275f);
                 animator_btn.setDuration(animationDuration);
                 animator_btn.start();
                 btn_set_use.setText("ON");
@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 // 어플 설정 버튼 및 텍스트 변경
                 iv_title.setBackgroundResource(R.drawable.roundbtn_on);
 
-                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", 350f);
+                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", 275f);
                 animator_btn.setDuration(animationDuration);
                 animator_btn.start();
                 btn_set_use.setText("ON");
