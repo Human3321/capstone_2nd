@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     private static final int PERMISSIONS_REQUEST = 100;
     long animationDuration = 1000; // 1초
 
-    public static boolean vib_mode; // 알림 진동 설정 (true - o , false - x)
-    public static boolean use_set; // 사용 설정 (true - ON , false - OFF)
+    public boolean vib_mode; // 알림 진동 설정 (true - o , false - x)
+    public boolean use_set; // 사용 설정 (true - ON , false - OFF)
 
     // 판별 결과
     int isVP = 0;

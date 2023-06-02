@@ -1,14 +1,11 @@
 package com.example.accesscall;
 
-import static java.lang.Integer.parseInt;
-
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Vibrator;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
@@ -17,23 +14,15 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.net.URL;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 
 public class CallReceiver extends BroadcastReceiver {
-
-    String phonestate;
+    private String previousState = "";
     public GettingPHP gPHP;
 
-    public static final String TAG_phoneState = "PHONE STATE";
     // 보이스피싱용 url
     private String url = "http://118.67.132.20:8080/user/"; // 서버 IP 주소
     public String result = null;
@@ -50,151 +39,111 @@ public class CallReceiver extends BroadcastReceiver {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("MissingPermission")
 
-    MainActivity sttManager = new MainActivity();
-
     @Override
     public void onReceive(Context context, Intent intent) {
         //구 팝업창 관련 처리. 다른 기능 완성 후에도 팝업창 생성에 문제 없으면 제거해도 OK
         //AlertWindow alertWindow = (AlertWindow) context;
         //alertWindow.setOverlayVisibility(View.VISIBLE);
 
-        // 진동 설정
-        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-
         if (intent.getAction().equals("android.intent.action.PHONE_STATE")) {
-            Bundle extras = intent.getExtras();
+            String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
 
-            if (extras != null) {
-                // 현재 폰 상태 가져옴
-                String state = extras.getString(TelephonyManager.EXTRA_STATE);
-
-                // 중복 호출 방지
-                if (state.equals(phonestate)) {
-                    return;
-                } else {
-                    phonestate = state;
-                }
-
-                // [벨 울리는 중]
+            if (state != null && !state.equals(previousState)) {
                 if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
-                    //Intent launchIntent = new Intent(context.getApplicationContext(), MainActivity.class);
-                    //launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    //context.startActivity(launchIntent);
-
-                    if (MainActivity.use_set == true) {
-                        String phone;
-                        if (intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER) != null) {
-                            // 수신 번호 가져옴
-                            phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-                            phoneNumtoReport = phone;
-
-                            // 안심번호 판별을 위해 추가----
-                            String phone_number = PhoneNumberUtils.formatNumber(phone);
-
-                            if(adapter.phoneNumCheck(phone_number)){
-                                Toast.makeText(context, "안심 번호입니다.", Toast.LENGTH_LONG).show();
-                                //return;
-                            }
-                            //----
-
-                            // 서버에 수신 전화번호 보내서 결과 받아옴
-                            try {
-                                gPHP = new GettingPHP();
-                                result = gPHP.execute(url + phone).get();
-                                if (result.length() >= 7) {
-                                    String full = result;
-                                    String split[] = full.split(":");
-                                    String s = split[1];
-                                    String s1[] = s.split("]");
-                                    //Toast.makeText(context, "주의! 신고 {" + s1[0] + "회 누적된 번호입니다.", Toast.LENGTH_LONG).show();
-
-                                    //1차 판별 팝업창 생성
-                                    Intent serviceIntent = new Intent(context, AlertWindow.class);
-                                    serviceIntent.putExtra(AlertWindow.Number, phone_number);
-                                    serviceIntent.putExtra(AlertWindow.isWarning, "주의");
-                                    serviceIntent.putExtra(AlertWindow.Count, s1[0]);
-                                    context.startService(serviceIntent);
-                                } else {
-                                    //Toast.makeText(context, "깨끗", Toast.LENGTH_LONG).show();
-
-                                    //1차 판별 팝업창 생성
-                                    Intent serviceIntent = new Intent(context, AlertWindow.class);
-                                    serviceIntent.putExtra(AlertWindow.Number, phone_number);
-                                    serviceIntent.putExtra(AlertWindow.isWarning, "깨끗");
-                                    serviceIntent.putExtra(AlertWindow.Count, "0");
-                                    context.startService(serviceIntent);
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
+                    handleRingingCall(context, intent);
+                } else if (state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
+                    handleActiveCall(context, intent);
+                } else if (state.equals(TelephonyManager.EXTRA_STATE_IDLE)) {
+                    handleIdleCall(context, intent);
                 }
-
-                // [통화 중]
-                else if (state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
-
-                    Intent launchIntent = new Intent(context.getApplicationContext(), MainActivity.class);
-                    launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(launchIntent);
-
-                    if (intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER) != null) {
-                        // 안심번호 판별을 위해 추가----
-                        String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-                        String phone_number = PhoneNumberUtils.formatNumber(phone);
-
-                        // 안심번호 여부 확인
-                        if(adapter.phoneNumCheck(phone_number)){
-                            Toast.makeText(context, "안심 번호입니다.", Toast.LENGTH_LONG).show();
-                            return;
-                        }
-
-                        MainActivity activity = MainActivity.getInstance();
-//                        activity.StartRecord();
-
-                        // Todo: 제대로 작동하는지 확인해봐야함!
-                        if(sttManager.isVP == 1){
-                            Toast.makeText(context, "보이스피싱 의심 전화입니다 !", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-
-                // [통화종료]
-                else if (state.equals(TelephonyManager.EXTRA_STATE_IDLE)) {
-                    if (intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER) != null) {
-                        String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-                        phoneNumtoReport = phone;
-
-                        System.out.println("통화 종료 확인");
-
-                        sttManager.StopRecord();
-
-                        // 안심번호 판별을 위해 추가----
-                        String phone_number = PhoneNumberUtils.formatNumber(phone);
-
-                        if(adapter.phoneNumCheck(phone_number)){
-                            Toast.makeText(context, "안심 번호입니다.", Toast.LENGTH_LONG).show();
-                            return;
-                        }
-                        //----
-
-                        if (sttManager.isVP == 1) {
-                            // 서버에 수신 전화번호 신고
-                            gPHP = new GettingPHP();
-                            gPHP.execute(reportUrl+phoneNumtoReport);
-                            Toast.makeText(context, "보이스피싱 주의! 서버에 자동 신고되었습니다.", Toast.LENGTH_LONG).show();
-                            // 진동 설정
-                            vibrator.vibrate(1000);
-                        } else {
-
-                        }
-                    }
-                }
+                previousState = state;
             }
         }
     }
 
-    // 서버 연동
+    private void handleRingingCall(Context context, Intent intent) {
+        String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+        if (phone != null) {
+            System.out.println("통화 수신 확인");
+            // 수신 번호 가져옴
+            phoneNumtoReport = phone;
+
+            // 안심번호 판별을 위해 추가----
+            String phone_number = PhoneNumberUtils.formatNumber(phone);
+
+            if(adapter.phoneNumCheck(phone_number)){
+                Toast.makeText(context, "안심 번호입니다.", Toast.LENGTH_LONG).show();
+                //return;
+            }
+
+            // 서버에 수신 전화번호 보내서 결과 받아옴
+            try {
+                gPHP = new CallReceiver.GettingPHP();
+                result = gPHP.execute(url + phone).get();
+                if (result.length() >= 7) {
+                    String full = result;
+                    String split[] = full.split(":");
+                    String s = split[1];
+                    String s1[] = s.split("]");
+                    //1차 판별 팝업창 생성
+                    Intent serviceIntent = new Intent(context, AlertWindow.class);
+                    serviceIntent.putExtra(AlertWindow.Number, phone_number);
+                    serviceIntent.putExtra(AlertWindow.isWarning, "주의");
+                    serviceIntent.putExtra(AlertWindow.Count, s1[0]);
+                    context.startService(serviceIntent);
+                } else {
+                    //1차 판별 팝업창 생성
+                    Intent serviceIntent = new Intent(context, AlertWindow.class);
+                    serviceIntent.putExtra(AlertWindow.Number, phone_number);
+                    serviceIntent.putExtra(AlertWindow.isWarning, "깨끗");
+                    serviceIntent.putExtra(AlertWindow.Count, "0");
+                    context.startService(serviceIntent);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void handleActiveCall(Context context,Intent intent) {
+
+        String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+        if (phone != null) {
+            System.out.println("통화 중 확인");
+
+            // Todo: 수신 시 동작 추가
+            
+            // Todo: 제대로 작동하는지 확인해봐야함!
+            if(MainActivity.getInstance().isVP == 1){
+                Toast.makeText(context, "보이스피싱 의심 전화입니다 !", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void handleIdleCall(Context context, Intent intent) {
+        // 진동 설정
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+        
+        if (phone != null) {
+            System.out.println("통화 종료 확인");
+            phoneNumtoReport = phone;
+            
+            // Todo: 종료 동작 추가
+
+            if (MainActivity.getInstance().isVP == 1) {
+                // 서버에 수신 전화번호 신고
+                gPHP = new CallReceiver.GettingPHP();
+                gPHP.execute(reportUrl+phoneNumtoReport);
+                Toast.makeText(context, "보이스피싱 주의! 서버에 자동 신고되었습니다.", Toast.LENGTH_LONG).show();
+                // 진동 설정
+                vibrator.vibrate(1000);
+            } else {
+
+            }
+        }
+    }
+
     public class GettingPHP extends AsyncTask<String, Integer, String> {
 
         // php 에서 데이터 읽어옴
