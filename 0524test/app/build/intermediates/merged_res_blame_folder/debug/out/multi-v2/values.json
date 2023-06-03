@@ -4,23 +4,6 @@
             "outputFile": "com.example.accesscall.app-mergeDebugResources-37:/values/values.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\PC\\Desktop\\test\\0524test\\app\\src\\main\\res\\values\\strings.xml",
-                    "from": {
-                        "startLines": "3,2,1",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "119,59,17",
-                        "endColumns": "107,58,40",
-                        "endOffsets": "222,113,53"
-                    },
-                    "to": {
-                        "startLines": "1717,1718,1720",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "107085,107193,107335",
-                        "endColumns": "107,58,40",
-                        "endOffsets": "107188,107247,107371"
-                    }
-                },
-                {
                     "source": "C:\\Users\\PC\\.gradle\\caches\\transforms-3\\5e0d95765da3b1547fe86ba35010e09e\\transformed\\transition-1.2.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11",
@@ -144,6 +127,40 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\PC\\Desktop\\push\\0524test\\app\\src\\main\\res\\values\\colors.xml",
+                    "from": {
+                        "startLines": "7,2,3,4,5,6,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "293,57,105,153,201,247,336",
+                        "endColumns": "41,46,46,46,44,44,41",
+                        "endOffsets": "330,99,147,195,241,287,373"
+                    },
+                    "to": {
+                        "startLines": "611,848,849,850,861,862,865",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "31106,48173,48220,48267,49011,49056,49222",
+                        "endColumns": "41,46,46,46,44,44,41",
+                        "endOffsets": "31143,48215,48262,48309,49051,49096,49259"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\PC\\Desktop\\push\\0524test\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "3,2,1",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "119,59,17",
+                        "endColumns": "107,58,40",
+                        "endOffsets": "222,113,53"
+                    },
+                    "to": {
+                        "startLines": "1717,1718,1720",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "107085,107193,107335",
+                        "endColumns": "107,58,40",
+                        "endOffsets": "107188,107247,107371"
+                    }
+                },
+                {
                     "source": "C:\\Users\\PC\\.gradle\\caches\\transforms-3\\85b903e3b1c74a11bc4ce1724de90e91\\transformed\\core-1.8.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,89,90,94,95,96,97,103,113,146,167,200",
@@ -163,7 +180,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\PC\\Desktop\\test\\0524test\\app\\build\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "source": "C:\\Users\\PC\\Desktop\\push\\0524test\\app\\build\\generated\\res\\google-services\\debug\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",
@@ -177,6 +194,25 @@
                         "startOffsets": "111382,112236,112318,112422,112531,112651,127653",
                         "endColumns": "143,81,103,108,119,99,76",
                         "endOffsets": "111521,112313,112417,112526,112646,112746,127725"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\PC\\Desktop\\push\\0524test\\app\\src\\main\\res\\values\\themes.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "102",
+                        "endLines": "14",
+                        "endColumns": "12",
+                        "endOffsets": "787"
+                    },
+                    "to": {
+                        "startLines": "5948",
+                        "startColumns": "4",
+                        "startOffsets": "404527",
+                        "endLines": "5960",
+                        "endColumns": "12",
+                        "endOffsets": "405079"
                     }
                 },
                 {
@@ -467,42 +503,6 @@
                         "startOffsets": "96541",
                         "endColumns": "57",
                         "endOffsets": "96594"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\PC\\Desktop\\test\\0524test\\app\\src\\main\\res\\values\\themes.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "102",
-                        "endLines": "14",
-                        "endColumns": "12",
-                        "endOffsets": "787"
-                    },
-                    "to": {
-                        "startLines": "5948",
-                        "startColumns": "4",
-                        "startOffsets": "404527",
-                        "endLines": "5960",
-                        "endColumns": "12",
-                        "endOffsets": "405079"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\PC\\Desktop\\test\\0524test\\app\\src\\main\\res\\values\\colors.xml",
-                    "from": {
-                        "startLines": "7,2,3,4,5,6,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "293,57,105,153,201,247,336",
-                        "endColumns": "41,46,46,46,44,44,41",
-                        "endOffsets": "330,99,147,195,241,287,373"
-                    },
-                    "to": {
-                        "startLines": "611,848,849,850,861,862,865",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "31106,48173,48220,48267,49011,49056,49222",
-                        "endColumns": "41,46,46,46,44,44,41",
-                        "endOffsets": "31143,48215,48262,48309,49051,49096,49259"
                     }
                 },
                 {

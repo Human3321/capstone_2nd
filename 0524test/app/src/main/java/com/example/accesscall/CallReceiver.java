@@ -25,7 +25,7 @@ public class CallReceiver extends BroadcastReceiver {
     public GettingPHP gPHP;
 
     // 보이스피싱용 url
-    private String url = "http://118.67.132.20:8080/user/"; // 서버 IP 주소
+    private String url = "http://118.67.132.20:8080/services1/user/"; // 서버 IP 주소
     public String result = null;
 
     // 신고용 url
