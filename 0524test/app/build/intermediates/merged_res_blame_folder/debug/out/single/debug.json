@@ -1,0 +1,186 @@
+[
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-v24_roundbtn_off.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-v24/roundbtn_off.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable_roundbtn_list_on.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable/roundbtn_list_on.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-v24_roundbtn_back_off.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-v24/roundbtn_back_off.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-v24_little_round_btn.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-v24/little_round_btn.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-v24_roundbtn_stroke.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-v24/roundbtn_stroke.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable_checked.png.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable/checked.png"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable_roundbtn_back_list_off.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable/roundbtn_back_list_off.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable_roundbtn_back_list_on.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable/roundbtn_back_list_on.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-v24_roundbtn_middle.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-v24/roundbtn_middle.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable_close.png.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable/close.png"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-v24_roundbtn_back_on.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-v24/roundbtn_back_on.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.accesscall.app-main-8:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/xml_accessibility_service_config.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/xml/accessibility_service_config.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/layout_telinfo_item.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/layout/telinfo_item.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-v24_roundbtn_back_middle.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-v24/roundbtn_back_middle.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.accesscall.app-main-8:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-v24_on_off_background.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-v24/on_off_background.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.accesscall.app-main-8:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-hdpi_ic_stat_notification.png.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-hdpi/ic_stat_notification.png"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.accesscall.app-main-8:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-anydpi_ic_stat_notification.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-anydpi/ic_stat_notification.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/layout_view_in_service.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/layout/view_in_service.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.accesscall.app-main-8:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable_alarm.png.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable/alarm.png"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-mdpi_ic_stat_notification.png.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-mdpi/ic_stat_notification.png"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-xhdpi_ic_stat_notification.png.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-xhdpi/ic_stat_notification.png"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/layout_activity_main.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.accesscall.app-main-8:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.accesscall.app-main-8:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable_roundbtn_list_off.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable/roundbtn_list_off.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.accesscall.app-main-8:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-v24_on_off_button.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-v24/on_off_button.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.accesscall.app-main-8:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable_vibration_off.png.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable/vibration_off.png"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-xxhdpi_ic_stat_notification.png.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-xxhdpi/ic_stat_notification.png"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.accesscall.app-main-8:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable_vibration_on.png.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable/vibration_on.png"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-v24_roundbtn_on.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-v24/roundbtn_on.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/xml_backup_rules.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-v24_vibration_button.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-v24/vibration_button.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-6:/drawable-v24_roundbtn.xml.flat",
+        "source": "com.example.accesscall.app-main-8:/drawable-v24/roundbtn.xml"
+    }
+]
