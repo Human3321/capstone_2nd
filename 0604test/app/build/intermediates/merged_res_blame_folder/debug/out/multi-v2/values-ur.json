@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.accesscall.app-mergeDebugResources-4:/values-ur/values-ur.xml",
+            "outputFile": "com.example.accesscall.app-mergeDebugResources-37:/values-ur/values-ur.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\samsung\\Desktop\\git\\caches\\transforms-3\\5ac46073ee2cb4cbb37aeb0c35be972f\\transformed\\appcompat-1.5.1\\res\\values-ur\\values-ur.xml",
+                    "source": "C:\\Users\\jinhe\\.gradle\\caches\\transforms-3\\5ac46073ee2cb4cbb37aeb0c35be972f\\transformed\\appcompat-1.5.1\\res\\values-ur\\values-ur.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\samsung\\Desktop\\git\\caches\\transforms-3\\3224dc1f8295b04abbc04297fe8beae0\\transformed\\jetified-play-services-base-18.0.1\\res\\values-ur\\values.xml",
+                    "source": "C:\\Users\\jinhe\\.gradle\\caches\\transforms-3\\3224dc1f8295b04abbc04297fe8beae0\\transformed\\jetified-play-services-base-18.0.1\\res\\values-ur\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\samsung\\Desktop\\git\\caches\\transforms-3\\0e43ca6c60edecb3ee9cbef03192b6cf\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-ur\\values.xml",
+                    "source": "C:\\Users\\jinhe\\.gradle\\caches\\transforms-3\\0e43ca6c60edecb3ee9cbef03192b6cf\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-ur\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -55,7 +55,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\samsung\\Desktop\\git\\caches\\transforms-3\\d67fad12ed741e83bf24945ad44b1d4f\\transformed\\material-1.7.0\\res\\values-ur\\values-ur.xml",
+                    "source": "C:\\Users\\jinhe\\.gradle\\caches\\transforms-3\\85b903e3b1c74a11bc4ce1724de90e91\\transformed\\core-1.8.0\\res\\values-ur\\values-ur.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "109",
+                        "startColumns": "4",
+                        "startOffsets": "9848",
+                        "endColumns": "100",
+                        "endOffsets": "9944"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\jinhe\\.gradle\\caches\\transforms-3\\d67fad12ed741e83bf24945ad44b1d4f\\transformed\\material-1.7.0\\res\\values-ur\\values-ur.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -71,23 +88,6 @@
                         "endLines": "5,33,34,35,36,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107",
                         "endColumns": "12,77,99,118,82,64,92,69,58,89,68,57,68,59,63,111,58,58,54,74,122,79,83,132,81,80,86,57,55,65,74,79,84,66,74,76,63,93,69,88,92,73,74,89,55,66,83,83,61,63,62,99,106,93,108,61,59,79",
                         "endOffsets": "304,3109,3209,3328,3411,5715,5808,5878,5937,6027,6096,6154,6223,6283,6347,6459,6518,6577,6632,6707,6830,6910,6994,7127,7209,7290,7377,7435,7491,7557,7632,7712,7797,7864,7939,8016,8080,8174,8244,8333,8426,8500,8575,8665,8721,8788,8872,8956,9018,9082,9145,9245,9352,9446,9555,9617,9677,9757"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\samsung\\Desktop\\git\\caches\\transforms-3\\85b903e3b1c74a11bc4ce1724de90e91\\transformed\\core-1.8.0\\res\\values-ur\\values-ur.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "109",
-                        "startColumns": "4",
-                        "startOffsets": "9848",
-                        "endColumns": "100",
-                        "endOffsets": "9944"
                     }
                 }
             ]

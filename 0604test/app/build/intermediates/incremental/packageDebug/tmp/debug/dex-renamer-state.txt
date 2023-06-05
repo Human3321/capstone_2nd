@@ -1,9 +1,9 @@
-#Mon Jun 05 10:55:50 KST 2023
-base.0=C\:\\Users\\samsung\\Desktop\\git\\0524test\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=C\:\\Users\\samsung\\Desktop\\git\\0524test\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.2=C\:\\Users\\samsung\\Desktop\\git\\0524test\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
-base.3=C\:\\Users\\samsung\\Desktop\\git\\0524test\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
-base.4=C\:\\Users\\samsung\\Desktop\\git\\0524test\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
+#Mon Jun 05 19:08:11 KST 2023
+base.0=C\:\\Users\\jinhe\\Desktop\\0605\\0604test\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=C\:\\Users\\jinhe\\Desktop\\0605\\0604test\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.2=C\:\\Users\\jinhe\\Desktop\\0605\\0604test\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
+base.3=C\:\\Users\\jinhe\\Desktop\\0605\\0604test\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+base.4=C\:\\Users\\jinhe\\Desktop\\0605\\0604test\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=10/classes.dex

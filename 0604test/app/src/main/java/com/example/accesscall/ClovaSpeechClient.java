@@ -32,12 +32,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 public class ClovaSpeechClient {
 
     // Clova Speech secret key
-    private static final String SECRET = "37f36df5d6874aaabec9850dfbf57615"; // Clova Speech secret key
-    private static final String INVOKE_URL = "https://clovaspeech-gw.ncloud.com/external/v1/5281/082d91470018ce8a7e5a1461883e3e783b9b2bf7b6af1b77f5aa7dd595b76799"; // Clova Speech invoke URL
+    private static final String SECRET = "ec68bdf9fba74e65974a8ca5732d86d9"; // Clova Speech secret key
+    private static final String INVOKE_URL = "https://clovaspeech-gw.ncloud.com/external/v1/5296/ff966b1eff052fd37622d1442e6612c02c06621268c19c3d55af000128465866"; // Clova Speech invoke URL
 
     private RequestQueue requestQueue;
     private Gson gson;
@@ -105,8 +104,7 @@ public class ClovaSpeechClient {
         private List<Boosting> boostings;
         //comma separated words
         private String forbiddens;
-        private Diarization diarization;
-
+        private Diarization diarization = new Diarization();
 
         public String getLanguage() {
             return language;
@@ -309,7 +307,7 @@ public class ClovaSpeechClient {
 
                             JSONObject segmentsJson = new JSONObject(segmentsJsonString);
                             String textEdited = segmentsJson.optString("textEdited");
-                            System.out.println("ClovaSpeechClient 응답 선공 태그 "+ textEdited);
+                            System.out.println("ClovaSpeechClient 응답 성공 태그 "+response.toString());
                             String decodedResponse = new String(textEdited.getBytes("ISO-8859-1"), "UTF-8");
                             callback.onSuccess(decodedResponse);
                         } catch (Exception e) {
@@ -332,7 +330,7 @@ public class ClovaSpeechClient {
         request.setHeaders(headers);
         System.out.println("ClovaSpeechClient headers 태그");
         System.out.println("ClovaSpeechClient headers 태그"+headers.get("X-CLOVASPEECH-API-KEY"));
-
+        System.out.println("enabla 태그"+nestRequestEntity.getDiarization().getEnable().toString());
         // Set request body parameters
         request.addStringParam("params", gson.toJson(nestRequestEntity), "application/json");
         System.out.println("ClovaSpeechClient addStringParam 완료 태그");
@@ -340,7 +338,7 @@ public class ClovaSpeechClient {
         System.out.println("addFile 완료 태그 ");
 
         // Add the request to the RequestQueue
-        request.setShouldCache(false); //이전 결과 있어도 새로 요청하여 응답을 보여준다.
+        //request.setShouldCache(false); //이전 결과 있어도 새로 요청하여 응답을 보여준다.
         requestQueue = Volley.newRequestQueue(context); // requestQueue 초기화 필수
         System.out.println("ClovaSpeechClient requestQueue 태그");
         requestQueue.add(request);

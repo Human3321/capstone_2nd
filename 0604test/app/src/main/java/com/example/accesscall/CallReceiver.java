@@ -6,15 +6,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Environment;
+import android.os.FileObserver;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -154,13 +156,65 @@ public class CallReceiver extends BroadcastReceiver {
         }
     }
 
+    private FileObserver fileObserver;
+    // String internalStorageDir = Environment.getExternalStorageDirectory().getAbsolutePath();
+    String directoryPath = "/storage/emulated/0/Recordings/Call";
+    String filePath = null;
+
+    private void startFileObservation() {
+        fileObserver = new FileObserver(directoryPath) {
+            @Override
+            public void onEvent(int event, String path) {
+                if (event == FileObserver.CREATE) {
+                    // 새 파일이 생성된 경우 처리 로직을 여기에 작성합니다.
+                    filePath = directoryPath + "/" + path;
+
+                    // filePath를 처리하는 코드를 추가합니다.
+                    System.out.println(filePath);
+                }
+            }
+        };
+        fileObserver.startWatching(); // 감시 시작
+        System.out.println("파일 감시 시작");
+    }
+
     private void handleActiveCall(Context context,Intent intent) {
 
         String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
         if (phone != null) {
             System.out.println("통화 중 확인");
 
-            // Todo: 수신 시 동작 추가
+            // 파일 감시 시작
+            startFileObservation();
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    /* ToDO : 여러번 받아와도 문제 없는지 확인
+                     *
+                     * */
+                    ClovaSpeechClient clovaSpeechClient = new ClovaSpeechClient(MainActivity.getInstance().getApplicationContext());
+                    System.out.println("Claova 객체 생성 태그");
+                    ClovaSpeechClient.NestRequestEntity requestEntity = new ClovaSpeechClient.NestRequestEntity();
+                    System.out.println("requestEntity 생성 태그");
+                    // String relativePath = "Recordings/Voice Recorder/A.m4a";
+
+                    clovaSpeechClient.upload(new File(filePath), requestEntity, MainActivity.getInstance().getApplicationContext(), new ClovaSpeechClient.UploadCallback() {
+                        @Override
+                        public void onSuccess(String decodedResponse) {
+                            // 성공적인 응답 처리
+                            System.out.println("ClovaSpeechClient 응답 성공 태그 "+ decodedResponse);
+                            MainActivity.getInstance().sendRequest(decodedResponse);
+                            System.out.println("글자 서버로 전송 태그 : "+decodedResponse);
+                        }
+                        @Override
+                        public void onError(String errorMessage) {
+                            // 오류 처리
+                            System.out.println("ClovaSpeechClient 오류 태그: " + errorMessage);
+                        }
+                    });
+                }
+            }, 40000); // 40초 지연
             
             // Todo: 제대로 작동하는지 확인해봐야함!
             if(MainActivity.getInstance().isVP == 1){

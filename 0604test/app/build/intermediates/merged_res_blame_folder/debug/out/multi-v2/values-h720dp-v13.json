@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.accesscall.app-mergeDebugResources-4:/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "com.example.accesscall.app-mergeDebugResources-37:/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\samsung\\Desktop\\git\\caches\\transforms-3\\5ac46073ee2cb4cbb37aeb0c35be972f\\transformed\\appcompat-1.5.1\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+                    "source": "C:\\Users\\jinhe\\.gradle\\caches\\transforms-3\\5ac46073ee2cb4cbb37aeb0c35be972f\\transformed\\appcompat-1.5.1\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

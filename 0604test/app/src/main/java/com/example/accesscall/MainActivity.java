@@ -110,9 +110,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     Button btn_set_use; // 어플 설정 On/Off 버튼
     ImageButton btn_set_vibration;  // 진동 설정 버튼
     TextView tv_set_vibration, tv_status;   // On/Off 버튼 배경 텍스트, 진동 설정 텍스트, 어플 설정 텍스트
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,8 +148,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         tv_set_vibration = (TextView) findViewById(R.id.tv_set_vibration);  //진동 설정 텍스트
 
         adapter = new PhoneNumInfoAdapter();
-
-
 
         AutoPermissions.Companion.loadAllPermissions(this, PERMISSIONS_REQUEST);
         getCallLog();
@@ -250,29 +245,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 // 껏다 켜도 상태 저장 용도
                 state ="ON";
 
-                //ToDO : Clova STT 실행 -> 나중에 옮기기
-                ClovaSpeechClient clovaSpeechClient = new ClovaSpeechClient(getApplicationContext());
-                System.out.println("Claova 객체 생성 태그");
-                ClovaSpeechClient.NestRequestEntity requestEntity = new ClovaSpeechClient.NestRequestEntity();
-                System.out.println("requestEntity 생성 태그");
-                String relativePath = "Recordings/Voice Recorder/A.m4a";
-                // 내부 저장소 디렉토리 가져오기
-                String internalStorageDir = Environment.getExternalStorageDirectory().getAbsolutePath();
-                clovaSpeechClient.upload(new File(internalStorageDir, relativePath), requestEntity, getApplicationContext(), new ClovaSpeechClient.UploadCallback() {
-                    @Override
-                    public void onSuccess(String decodedResponse) {
-                        // 성공적인 응답 처리
-                        System.out.println("ClovaSpeechClient 응답 성공 태그 "+ decodedResponse);
-                        sendRequest(decodedResponse);
-                        System.out.println("글자 서버로 전송 태그 : "+decodedResponse);
-                    }
-                    @Override
-                    public void onError(String errorMessage) {
-                        // 오류 처리
-                        System.out.println("ClovaSpeechClient 오류 태그: " + errorMessage);
-                    }
-                });
-
                 // 팝업창 권한
                 onCheckPermission();
 
@@ -307,6 +279,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
                 i++;
                 getCallLog();
+
             }
         });
 
@@ -372,6 +345,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 use_set = true;
 
                 getCallLog();
+
             }
             else if(state.contains("OFF")){ // 저장된 어플 사용 설정이 OFF라면
                 //어플 배경 이미지 변경
@@ -525,142 +499,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     @Override
     public void onGranted(int i, @NonNull String[] strings) {
 
-    }
-
-    // 리스너
-    // 사용자가 말을 멈추면 onEndOfSpeech() 호출
-    // 에러가 발생했다면 onError()
-    // 음성인식 결과가 제대로 나왔다면 onResults() 호출
-    public RecognitionListener listener = new RecognitionListener() {
-        @Override
-        public void onReadyForSpeech(Bundle params) {
-//            Toast.makeText(getApplicationContext(),"음성인식을 시작합니다.",Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onBeginningOfSpeech() {
-
-        }
-
-        @Override
-        public void onRmsChanged(float rmsdB) {
-
-        }
-
-        @Override
-        public void onBufferReceived(byte[] buffer) {
-
-        }
-
-        @Override
-        public void onEndOfSpeech() {
-
-        }
-
-        @Override
-        public void onError(int error) {
-            String message;
-
-            switch (error) {
-                case SpeechRecognizer.ERROR_AUDIO:
-                    message = "오디오 오류";
-                    break;
-                /*case SpeechRecognizer.ERROR_CLIENT:
-                    message = "앱 오류";
-                    break;*/
-                case SpeechRecognizer.ERROR_CLIENT:
-                    //message = "클라이언트 에러";
-                    //speechRecognizer.stopListening()을 호출하면 발생하는 에러
-                    return; //토스트 메세지 출력 X
-                case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
-                    message = "권한이 없습니다.";
-                    break;
-                case SpeechRecognizer.ERROR_NETWORK:
-                    message = "네트워크 에러";
-                    break;
-                case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
-                    message = "네트워크 타임아웃";
-                    break;
-                /*case SpeechRecognizer.ERROR_NO_MATCH:
-                    message = "다시 시도해 주세요.";
-                    break;*/
-                case SpeechRecognizer.ERROR_NO_MATCH:
-                    // message = "찾을 수 없음";
-                    // 녹음을 오래하거나 speechRecognizer.stopListening()을 호출하면 발생하는 에러
-                    // speechRecognizer 다시 생성해 녹음 재개
-                    if (recording)
-                        StartRecord();
-                    return; //토스트 메세지 출력 X
-                case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
-                    message = "RECOGNIZER가 바쁨";
-                    break;
-                case SpeechRecognizer.ERROR_SERVER:
-                    message = "서버 오류";
-                    break;
-                case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
-                    message = "대기시간 초과";
-                    break;
-                default:
-                    message = "알 수 없는 오류 발생";
-                    break;
-            }
-            Toast.makeText(getApplicationContext(), "에러가 발생하였습니다. : " + message, Toast.LENGTH_SHORT).show();
-        }
-
-        // 인식 결과가 준비됐을 때 호출
-        // 기존 text 에 인식결과를 이어붙인 text 출력
-        @Override
-        public void onResults(Bundle results) {
-            // 말을 하면 ArrayList에 단어를 넣습니다.
-            ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-            StringBuilder stringBuilder = new StringBuilder();
-
-            for (String match : matches) {
-                stringBuilder.append(match);
-            }
-
-            // 최종 STT 텍스트
-            String finalNewText = stringBuilder.toString();
-
-            // 텍스트 길이가 200 이상이 되면
-            if (finalNewText.length() >= 20) {
-                System.out.println("글자 충족");
-                // 전송
-                sendRequest(finalNewText);
-                System.out.println("글자 보냄");
-            }
-
-        }
-
-        @Override
-        public void onPartialResults(Bundle partialResults) {
-
-        }
-
-        @Override
-        public void onEvent(int eventType, Bundle params) {
-
-        }
-    };
-
-    // 녹음 시작
-    public void StartRecord() {
-        recording = true;
-
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getApplicationContext());
-        speechRecognizer.setRecognitionListener(listener);
-        // 녹음 시작
-        speechRecognizer.startListening(intent);
-        System.out.println("STT 시작");
-    }
-
-    // 녹음 중지
-    public void StopRecord() {
-        recording = false;
-
-        // 녹음 중지
-        speechRecognizer.stopListening();
-        System.out.println("변환 종료");
     }
 
     // STT 텍스트를 바탕으로 서버에 결과 전송
