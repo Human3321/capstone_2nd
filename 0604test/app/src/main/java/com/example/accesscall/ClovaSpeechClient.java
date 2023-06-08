@@ -300,13 +300,16 @@ public class ClovaSpeechClient {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONArray segmentsArray = response.getJSONArray("segments");
-
+                            //
+                            String test = response.toString();
+                            String tst = new String(test.getBytes("ISO-8859-1"), "UTF-8");
+                            System.out.println("태그"+tst);
+//                            JSONArray segmentsArray = response.getJSONArray("segments");
                             // 대괄호로 묶인 배열 제거
-                            String segmentsJsonString = segmentsArray.getJSONObject(0).toString();
+//                            String segmentsJsonString = segmentsArray.getJSONObject(0).toString();
 
-                            JSONObject segmentsJson = new JSONObject(segmentsJsonString);
-                            String textEdited = segmentsJson.optString("textEdited");
+//                            JSONObject segmentsJson = new JSONObject(segmentsJsonString);
+                            String textEdited = response.optString("text");
                             System.out.println("ClovaSpeechClient 응답 성공 태그 "+response.toString());
                             String decodedResponse = new String(textEdited.getBytes("ISO-8859-1"), "UTF-8");
                             callback.onSuccess(decodedResponse);

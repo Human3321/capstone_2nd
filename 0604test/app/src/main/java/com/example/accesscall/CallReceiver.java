@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -31,7 +32,7 @@ public class CallReceiver extends BroadcastReceiver {
     public String result = null;
 
     // 신고용 url
-    String reportUrl = "http://118.67.132.20:8080/report/";
+    String reportUrl = "http://118.67.132.20:8080/services1/report/";
 
     // 신고용 전역 휴대폰번호
     String phoneNumtoReport;
@@ -71,6 +72,7 @@ public class CallReceiver extends BroadcastReceiver {
         String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
         if (phone != null) {
             System.out.println("통화 수신 확인");
+            MainActivity.getInstance().isVP = 0;
             // 수신 번호 가져옴
             phoneNumtoReport = phone;
 
@@ -101,6 +103,7 @@ public class CallReceiver extends BroadcastReceiver {
                 return;
             }
 
+            // Todo: 지금 여기 동작 안 하는 듯 , url 이랑 7자 이상 및 파싱도 확인
             // 서버에 수신 전화번호 보내서 결과 받아옴
             try {
                 gPHP = new CallReceiver.GettingPHP();
@@ -204,7 +207,44 @@ public class CallReceiver extends BroadcastReceiver {
                         public void onSuccess(String decodedResponse) {
                             // 성공적인 응답 처리
                             System.out.println("ClovaSpeechClient 응답 성공 태그 "+ decodedResponse);
-                            MainActivity.getInstance().sendRequest(decodedResponse);
+                            MainActivity.getInstance().sendRequest(decodedResponse, new MainActivity.SendCallback() {
+                                @Override
+                                public void onSuccess() {
+                                    // Todo: 제대로 작동하는지 확인해봐야함!
+                                    if(MainActivity.getInstance().isVP == 1){
+                                        //Toast.makeText(context, "보이스피싱 의심 전화입니다 !", Toast.LENGTH_SHORT).show();
+                                        System.out.println("VPIS == 1 태그");
+
+//                                        //보이스 피싱 판별 팝업창 생성
+//                                        Intent serviceIntent = new Intent(context, AlertWindow.class);
+//                                        serviceIntent.putExtra(AlertWindow.Number, phone_number);
+//                                        serviceIntent.putExtra(AlertWindow.isWarning, "피싱");
+//                                        serviceIntent.putExtra(AlertWindow.Count, "0"); //2차 판별이므로 0
+//                                        context.startService(serviceIntent);
+//                                        Toast.makeText(context, "헤헷헤헤헤헤헷", Toast.LENGTH_LONG).show();
+                                        System.out.println("VPIS == 1 팝업 태그");
+                                        // Handler 객체 생성
+//                                        Handler handler = new Handler();
+//
+//                                        // 일정 시간 후에 서비스 중지 실행
+//                                        long delayMillis = 5000; // 5초 후에 서비스 중지
+//                                        handler.postDelayed(new Runnable() {
+//                                            @Override
+//                                            public void run() {
+//                                                // 서비스 중지 코드 추가
+//                                                context.stopService(serviceIntent);
+//                                            }
+//                                        }, delayMillis);
+
+                                        System.out.println("Success 종료");
+                                    }
+                                }
+
+                                @Override
+                                public void onError(String errorMessage) {
+                                    System.out.println("callback onError 통신 오류 태그: " + errorMessage);
+                                }
+                            });
                             System.out.println("글자 서버로 전송 태그 : "+decodedResponse);
                         }
                         @Override
@@ -214,32 +254,8 @@ public class CallReceiver extends BroadcastReceiver {
                         }
                     });
                 }
-            }, 40000); // 40초 지연
-            
-            // Todo: 제대로 작동하는지 확인해봐야함!
-            if(MainActivity.getInstance().isVP == 1){
-                //Toast.makeText(context, "보이스피싱 의심 전화입니다 !", Toast.LENGTH_SHORT).show();
+            }, 60000); // 60초 지연
 
-                //보이스 피싱 판별 팝업창 생성
-                Intent serviceIntent = new Intent(context, AlertWindow.class);
-                serviceIntent.putExtra(AlertWindow.Number, phone_number);
-                serviceIntent.putExtra(AlertWindow.isWarning, "피싱");
-                serviceIntent.putExtra(AlertWindow.Count, "0"); //2차 판별이므로 0
-                context.startService(serviceIntent);
-
-                // Handler 객체 생성
-                Handler handler = new Handler();
-
-                // 일정 시간 후에 서비스 중지 실행
-                long delayMillis = 5000; // 5초 후에 서비스 중지
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // 서비스 중지 코드 추가
-                        context.stopService(serviceIntent);
-                    }
-                }, delayMillis);
-            }
         }
     }
 

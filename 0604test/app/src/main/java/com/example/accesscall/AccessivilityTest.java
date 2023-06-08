@@ -120,15 +120,15 @@ public class AccessivilityTest extends AccessibilityService {
                 for (String match : matches) {
                     stringBuilder.append(match);
                 }
-
                 // 최종 STT 텍스트
+
                 String finalNewText = stringBuilder.toString();
 
                 // 텍스트 길이가 200 이상이 되면
                 if (finalNewText.length() >= 40) {
                     System.out.println("글자 충족");
                     // 전송
-                    sttManager.sendRequest(finalNewText);
+//                    sttManager.sendRequest(finalNewText);
                     System.out.println("글자 보냄");
                 }
             }

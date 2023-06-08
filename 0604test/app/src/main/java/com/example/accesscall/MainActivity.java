@@ -41,9 +41,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -73,19 +75,16 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity implements AutoPermissionsListener {
     private static final int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 1; //다른 앱 위에 그리기(팝업창)
     private static MainActivity instance;
-
     public static MainActivity getInstance() {
         return instance;
     }
     private static final int PERMISSIONS_REQUEST = 100;
     long animationDuration = 1000; // 1초
-
     public boolean vib_mode; // 알림 진동 설정 (true - o , false - x)
     public boolean use_set; // 사용 설정 (true - ON , false - OFF)
 
     // 판별 결과
     int isVP = 0;
-
     int i = 0; // 안심번호 Load 테스트용
     PhoneNumInfoAdapter adapter;
 
@@ -116,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);  //세로 고정
         instance = this;
         setContentView(R.layout.activity_main);
-
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -279,7 +277,29 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
                 i++;
                 getCallLog();
+/*
+                ClovaSpeechClient clovaSpeechClient = new ClovaSpeechClient(MainActivity.getInstance().getApplicationContext());
+                System.out.println("Claova 객체 생성 태그");
+                ClovaSpeechClient.NestRequestEntity requestEntity = new ClovaSpeechClient.NestRequestEntity();
+                System.out.println("requestEntity 생성 태그");
+                // String relativePath = "Recordings/Voice Recorder/A.m4a";
+                String filePath = "/storage/emulated/0/Recordings/Call/Call Recording 김아름_230605_173503.m4a";
 
+                clovaSpeechClient.upload(new File(filePath), requestEntity, MainActivity.getInstance().getApplicationContext(), new ClovaSpeechClient.UploadCallback() {
+                    @Override
+                    public void onSuccess(String decodedResponse) {
+                        // 성공적인 응답 처리
+                        System.out.println("ClovaSpeechClient 응답 성공 태그 "+ decodedResponse);
+                        MainActivity.getInstance().sendRequest(decodedResponse);
+                        System.out.println("글자 서버로 전송 태그 : "+decodedResponse);
+                    }
+                    @Override
+                    public void onError(String errorMessage) {
+                        // 오류 처리
+                        System.out.println("ClovaSpeechClient 오류 태그: " + errorMessage);
+                    }
+                });
+*/
             }
         });
 
@@ -501,8 +521,14 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
     }
 
+    int initialTimeoutMs = 5000; // 초기 타임아웃 값 (5초)
+    int maxNumRetries = 3; // 최대 재시도 횟수
+    float backoffMultiplier = 1.0f; // 재시도 간격 배수
+
+    RetryPolicy retryPolicy = new DefaultRetryPolicy(initialTimeoutMs, maxNumRetries, backoffMultiplier);
+
     // STT 텍스트를 바탕으로 서버에 결과 전송
-    public void sendRequest(String txt) {
+    public void sendRequest(String txt, final MainActivity.SendCallback callback) {
         // url 주소
         String url = "http://49.50.172.239:8081/myAI/";
         // url 인코딩
@@ -535,11 +561,13 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                             isVP = jsonObject.getInt("answer");
                             System.out.println("응답 받음 태그");
                             System.out.println("결과/확률 태그 : "+isVP+" / "+percent+"%");
+                            callback.onSuccess();
                         }
                         catch (Exception e){
                             Double percent = 0.0;
                             isVP = 0;
                             System.out.println("응답 에러 태그");
+                            callback.onError(e.getMessage());
                         }
                     }
                 },
@@ -552,9 +580,15 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                     }
                 });
         System.out.println("요청 준비");
+        request.setRetryPolicy(retryPolicy); // RetryPolicy 설정
         request.setShouldCache(false); //이전 결과 있어도 새로 요청하여 응답을 보여준다.
         queue = Volley.newRequestQueue(this); // requestQueue 초기화 필수
         queue.add(request);
         System.out.println("요청 보냄.");
     };
+
+    public interface SendCallback {
+        void onSuccess();
+        void onError(String errorMessage);
+    }
 }
