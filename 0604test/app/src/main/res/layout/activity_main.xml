@@ -93,10 +93,13 @@
                 android:gravity="center"
                 android:text="Presented By 개발해야조"
                 android:textColor="#959595"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+                app:layout_constraintVertical_bias="1.0" />
 
             <FrameLayout
                 android:id="@+id/frameLayout"
@@ -126,7 +129,7 @@
                     android:gravity="center"
                     android:text="OFF"
                     android:textColor="#857C7C"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_set_use2"
@@ -139,7 +142,7 @@
                     android:gravity="center"
                     android:text="ON"
                     android:textColor="#857C7C"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/btn_set_use"
@@ -151,7 +154,7 @@
                     android:background="@drawable/on_off_button"
                     android:elevation="8dp"
                     android:text="OFF"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:translationZ="4dp" />
 
             </FrameLayout>
@@ -194,7 +197,7 @@
                     android:layout_gravity="center|bottom"
                     android:elevation="16dp"
                     android:text="ON"
-                    android:textSize="10dp"
+                    android:textSize="10sp"
                     android:translationZ="12dp" />
 
             </FrameLayout>
