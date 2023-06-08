@@ -1,186 +1,258 @@
 [
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable_roundbtn_list_off.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable/roundbtn_list_off.xml"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/xml_accessibility_service_config.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/xml/accessibility_service_config.xml"
-    },
-    {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-v24_roundbtn_on.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-v24/roundbtn_on.xml"
-    },
-    {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-v24_roundbtn_off.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-v24/roundbtn_off.xml"
-    },
-    {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable_close.png.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable/close.png"
-    },
-    {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-xhdpi_ic_stat_notification.png.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-xhdpi/ic_stat_notification.png"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable_roundbtn_list_on.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable\\roundbtn_list_on.xml"
     },
     {
         "merged": "com.example.accesscall.app-merged_res-39:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable/ic_launcher_background.xml"
+        "source": "com.example.accesscall.app-debug-40:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-anydpi_ic_stat_notification.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-anydpi/ic_stat_notification.xml"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable_checked.png.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable\\checked.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-v24_on_off_button.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-v24/on_off_button.xml"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_roundbtn_back_off.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\roundbtn_back_off.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.accesscall.app-main-41:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_roundbtn_off.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\roundbtn_off.xml"
     },
     {
         "merged": "com.example.accesscall.app-merged_res-39:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/mipmap-anydpi-v26/ic_launcher.xml"
+        "source": "com.example.accesscall.app-debug-40:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/layout_view_in_service.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/layout/view_in_service.xml"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_roundbtn_back_on.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\roundbtn_back_on.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable_alarm.png.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable/alarm.png"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\xml\\data_extraction_rules.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-v24_roundbtn_back_off.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-v24/roundbtn_back_off.xml"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable_close.png.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable\\close.png"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable_alarm.png.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable\\alarm.png"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-xxhdpi_ic_stat_notification.png.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-xxhdpi\\ic_stat_notification.png"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_roundbtn_stroke.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\roundbtn_stroke.xml"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable_roundbtn_list_off.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable\\roundbtn_list_off.xml"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_on_off_button.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\on_off_button.xml"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-xhdpi_ic_stat_notification.png.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-xhdpi\\ic_stat_notification.png"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_vibration_button.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\vibration_button.xml"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\xml_accessibility_service_config.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\xml\\accessibility_service_config.xml"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_roundbtn_back_middle.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\roundbtn_back_middle.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable_roundbtn_back_list_off.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable\\roundbtn_back_list_off.xml"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable_vibration_off.png.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable\\vibration_off.png"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_on_off_background.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\on_off_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_little_round_btn.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\little_round_btn.xml"
+    },
+    {
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\layout_view_in_service.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\layout\\view_in_service.xml"
     },
     {
         "merged": "com.example.accesscall.app-merged_res-39:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "source": "com.example.accesscall.app-debug-40:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.accesscall.app-main-41:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_roundbtn.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\roundbtn.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.example.accesscall.app-main-41:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\xml\\backup_rules.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/xml_data_extraction_rules.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/xml/data_extraction_rules.xml"
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/layout_activity_main.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/layout/activity_main.xml"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-v24_roundbtn_middle.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-v24/roundbtn_middle.xml"
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-hdpi/ic_launcher_round.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/xml_backup_rules.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/xml/backup_rules.xml"
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-v24_roundbtn.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-v24/roundbtn.xml"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-anydpi_ic_stat_notification.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-anydpi\\ic_stat_notification.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.example.accesscall.app-main-41:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-xxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-v24_roundbtn_stroke.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-v24/roundbtn_stroke.xml"
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-xxhdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/layout_telinfo_item.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/layout/telinfo_item.xml"
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-v24_vibration_button.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-v24/vibration_button.xml"
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-hdpi_ic_stat_notification.png.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-hdpi/ic_stat_notification.png"
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-xxxhdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-xxhdpi_ic_stat_notification.png.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-xxhdpi/ic_stat_notification.png"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable_vibration_on.png.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable\\vibration_on.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable_roundbtn_back_list_off.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable/roundbtn_back_list_off.xml"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\layout_telinfo_item.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\layout\\telinfo_item.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable_checked.png.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable/checked.png"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.accesscall.app-main-41:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-xhdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable_vibration_on.png.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable/vibration_on.png"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_roundbtn_middle.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\roundbtn_middle.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable_roundbtn_back_list_on.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable/roundbtn_back_list_on.xml"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.accesscall.app-main-41:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-v24_ic_launcher_foreground.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-v24/ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-mdpi_ic_stat_notification.png.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-mdpi\\ic_stat_notification.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-v24_roundbtn_back_on.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-v24/roundbtn_back_on.xml"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-hdpi_ic_stat_notification.png.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-hdpi\\ic_stat_notification.png"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.accesscall.app-main-41:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable-v24_roundbtn_on.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable-v24\\roundbtn_on.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable_vibration_off.png.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable/vibration_off.png"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\drawable_roundbtn_back_list_on.xml.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\drawable\\roundbtn_back_list_on.xml"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.example.accesscall.app-main-41:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-mdpi_ic_stat_notification.png.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-mdpi/ic_stat_notification.png"
+        "merged": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-merged_res-39:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\PC\\.gradle\\daemon\\7.5\\com.example.accesscall.app-main-41:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.accesscall.app-main-41:/mipmap-xxxhdpi/ic_launcher_round.webp"
-    },
-    {
-        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.accesscall.app-main-41:/mipmap-mdpi/ic_launcher_round.webp"
-    },
-    {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-v24_little_round_btn.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-v24/little_round_btn.xml"
-    },
-    {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-v24_on_off_background.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-v24/on_off_background.xml"
-    },
-    {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable_roundbtn_list_on.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable/roundbtn_list_on.xml"
-    },
-    {
-        "merged": "com.example.accesscall.app-merged_res-39:/drawable-v24_roundbtn_back_middle.xml.flat",
-        "source": "com.example.accesscall.app-main-41:/drawable-v24/roundbtn_back_middle.xml"
+        "merged": "com.example.accesscall.app-merged_res-39:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.accesscall.app-debug-40:/mipmap-hdpi/ic_launcher_foreground.png"
     }
 ]

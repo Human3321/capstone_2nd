@@ -3478,6 +3478,7 @@ layout support_simple_spinner_dropdown_item
 layout telinfo_item
 layout view_in_service
 mipmap ic_launcher
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
 raw firebase_common_keep

@@ -74,7 +74,9 @@
                     android:background="@android:color/transparent"
                     android:scaleType="fitXY"
                     android:src="@drawable/close"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    tools:ignore="TouchTargetSizeCheck"
+                    android:contentDescription="."
+                    />
 
             </LinearLayout>
 

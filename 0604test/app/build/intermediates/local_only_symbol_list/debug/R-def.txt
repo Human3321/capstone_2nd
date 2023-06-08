@@ -59,6 +59,7 @@ layout activity_main
 layout telinfo_item
 layout view_in_service
 mipmap ic_launcher
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 string accessibility_service_description
 string accessibility_service_name
