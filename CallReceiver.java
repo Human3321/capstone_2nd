@@ -4,32 +4,35 @@ import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Bundle;
+import android.os.Environment;
+import android.os.FileObserver;
+import android.os.Handler;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
-import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
-import android.os.Environment;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-
-import java.io.File;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CallReceiver extends BroadcastReceiver {
     String phonestate;
     public static final String TAG_phoneState = "PHONE STATE";
-    String url = "http://13.124.192.194:54103/user/"; // 서버 IP 주소
+    private String url = "http://118.67.132.20:8080/services1/user/"; // 서버 IP 주소
 
     // 신고용 url
-    String reportUrl = "http://13.124.192.194:54103/report/";
+    String reportUrl = "http://118.67.132.20:8080/services1/report/";
     // 신고용 전역 휴대폰번호
     String phoneNumtoReport;
 
