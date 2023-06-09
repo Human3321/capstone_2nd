@@ -37,96 +37,100 @@ public class CallReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
-
-        // TODO: This method is called when the BroadcastReceiver is receiving
-        // an Intent broadcast.
-        //throw new UnsupportedOperationException("Not yet implemented");
-
-        Log.d(TAG_phoneState,"onReceive()");
-
+        
         if (intent.getAction().equals("android.intent.action.PHONE_STATE")) {
+            String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
 
-            //TelecomManager telephonyManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-
-            Bundle extras = intent.getExtras();
-
-            if (extras != null) {
-
-                // 현재 폰 상태 가져옴
-                String state = extras.getString(TelephonyManager.EXTRA_STATE);
-                Log.d("phone_state", state);
-
-                // 중복 호출 방지
-                if (state.equals(phonestate)) {
-                    return;
-                } else {
-                    phonestate = state;
-                }
-
-                // [벨 울리는 중]
+            if (state != null && !state.equals(previousState)) {
                 if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
+                    handleRingingCall(context, intent);
+                } else if (state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
+                    handleActiveCall(context, intent);
+                } else if (state.equals(TelephonyManager.EXTRA_STATE_IDLE)) {
+                    handleIdleCall(context, intent);
+                }
+                previousState = state;
+            }
+        }
+    }
 
-                    if(MainActivity.use_set == true) {
-                        String phone;
+    private void handleRingingCall(Context context, Intent intent) {
+        String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+        if (phone != null) {
+            System.out.println("통화 수신 확인");
+            MainActivity.getInstance().isVP = 0;
+            // 수신 번호 가져옴
+            phoneNumtoReport = phone;
 
-                        if (intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER) != null) {
-                            // 수신 번호 가져옴
-                            phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+            if(adapter.phoneNumCheck(phone_number)){
+                
+            }
+        }
+    }
 
-                            Log.d("qqq", "통화벨 울리는중");
-                            Log.d("phone_number", "수신 전화번호: " + phone);
+    private FileObserver fileObserver;
+    String directoryPath = "/storage/emulated/0/Recordings/Call";
+    String filePath = null;
 
+    private void startFileObservation() {
+        fileObserver = new FileObserver(directoryPath) {
+            @Override
+            public void onEvent(int event, String path) {
+                if (event == FileObserver.CREATE) {
+                    // 새 파일이 생성 처리 로직
+                    filePath = directoryPath + "/" + path;
+                    // filePath를 처리하는 코드를 추가합니다.
+                    System.out.println(filePath);
+                }
+            }
+        };
+        fileObserver.startWatching(); // 감시 시작
+        System.out.println("파일 감시 시작");
+    }
 
-                            try {
-                                // 서버에 수신 전화번호 보내서 결과 받아옴
-                                gPHP = new GettingPHP();
-                                result = gPHP.execute(url + phone).get();
-                                Log.d("res_11", result);
+    private void handleActiveCall(Context context,Intent intent) {
 
-                                if (result.length() >= 7) {
-                                    String full = result;
-                                    String split[] = full.split(":");
-                                    String s = split[1];
-                                    String s1[] = s.split("]");
-                                    Toast.makeText(context, "주의! 신고 {" + s1[0] + "회 누적된 번호입니다.", Toast.LENGTH_LONG).show();
-                                } else {
-                                    Toast.makeText(context, "깨끗", Toast.LENGTH_LONG).show();
-                                }
+        String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+        if (phone != null) {
+            System.out.println("통화 중 확인");
 
-                            } catch (Exception e) {
-                                Log.d("error_e", String.valueOf(e));
-                                e.printStackTrace();
-                            }
-                            Log.d("res_22", result);
+            // 파일 감시 시작
+            startFileObservation();
 
-                        }
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(MainActivity.getInstance().isVP == 1){
+                        //Toast.makeText(context, "보이스피싱 의심 전화입니다 !", Toast.LENGTH_SHORT).show();
+                        System.out.println("VPIS == 1 태그");
+                        
+                        Toast.makeText(context, "보이스피싱", Toast.LENGTH_LONG).show();
+                        System.out.println("VPIS == 1 팝업 태그");
+                        
+                        System.out.println("Success 종료 태그");
                     }
+                }         
+            }, 60000); // 60초 지연
+        }
+    }
 
-                }
-                // [통화 중]
-                else if (state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
-                    Log.d("qqq", "통화중");
-                    // Todo: 소켓 통신 받아오기
-                    // -> 앱 실행시 스레드로 해결
-                }
-                // [통화종료]
-                else if (state.equals(TelephonyManager.EXTRA_STATE_IDLE)) {
-                    Log.d("qqq", "통화종료 혹은 통화벨 종료");
-                    // Todo: 팝업창 띄워서 신고 기능 구현하기
-//                    // 일단 팝업창 띄워보려고 함
-//                    MainActivity ma = new MainActivity();
-//                    ma.showDialog();
+    private void handleIdleCall(Context context, Intent intent) {
+        // 진동 설정
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+        
+        if (phone != null) {
+            System.out.println("통화 종료 확인");
+            phoneNumtoReport = phone;
+            
+            // Todo: 종료 동작 추가
 
-                    // Todo: 자동 신고
-                    // 받아온 판별 결과가 1이라면
-                    if(MainActivity.isVP == 1){
-                        // 서버에 수신 전화번호 신고
-                        gPHP = new GettingPHP();
-                        gPHP.execute(reportUrl+phoneNumtoReport);
-                    }
+            if (MainActivity.getInstance().isVP == 1) {
+                // 서버에 수신 전화번호 신고
+                gPHP = new CallReceiver.GettingPHP();
+                gPHP.execute(reportUrl+phoneNumtoReport);
+            } else {
 
-                }
             }
         }
     }

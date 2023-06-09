@@ -22,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST = 100;
     long animationDuration = 1000; // 1초
 
+    private static MainActivity instance;
+    public static MainActivity getInstance() {
+        return instance;
+    }
+
     public static boolean vib_mode; // 알림 진동 설정 (true - o , false - x)
     public static boolean use_set; // 사용 설정 (true - ON , false - OFF)
 
@@ -31,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     int Port = 59082;
 
     // 판별 결과
-    static int isVP;
+    static int isVP = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 어플 설정 버튼 리스너
+        // 어플 설정 버튼 리스너    
         btn_set_use.setOnClickListener(new View.OnClickListener() {
 
             @Override
