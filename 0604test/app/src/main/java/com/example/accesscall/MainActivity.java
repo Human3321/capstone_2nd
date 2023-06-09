@@ -86,8 +86,12 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     // 판별 결과
     int isVP = 0;
     String percent = "";
+
+    // 안심번호 변수 선언
     int i = 0; // 안심번호 Load 테스트용
-    PhoneNumInfoAdapter adapter;
+
+    ArrayList<PhoneNumInfo> items;
+    // 안심번호
 
     // 현재 녹음중인지 여부
     boolean recording = false;
@@ -145,8 +149,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
         btn_set_vibration = (ImageButton) findViewById(R.id.btn_set_vibration); //진동 설정 버튼
         tv_set_vibration = (TextView) findViewById(R.id.tv_set_vibration);  //진동 설정 텍스트
-
-        adapter = new PhoneNumInfoAdapter();
 
         AutoPermissions.Companion.loadAllPermissions(this, PERMISSIONS_REQUEST);
         getCallLog();
@@ -407,6 +409,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         }
     }
 
+    // 준범 - SharedPreference
 
     @Override
     protected void onPause() {
@@ -428,6 +431,8 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         Log.d("tag","onDestroy 호출됨");
         saveState();
     }
+
+    ///
 
     /* 팝업창 관련 함수들.. */
 
@@ -478,12 +483,29 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         }
     }
 
+    public void addItem(PhoneNumInfo item){
+        if(!items.contains(item))
+            items.add(item);
+    }
+
+    public boolean phoneNumCheck(String phoneNum){
+        boolean flag = false;
+        for(int i = 0; i < items.size(); i++){
+            PhoneNumInfo info = items.get(i);
+            Log.d("check","item:"+info.getName()+"/"+info.getPhoneNumber()+"phoneNum:"+phoneNum);
+            if(info.getPhoneNumber().equals(phoneNum)){
+                flag = true;
+                return flag;
+            }
+        }
+        return flag;
+    }
+
     public void getCallLog(){
-        adapter.newArray();
+        items = new ArrayList<PhoneNumInfo>();
         StringBuffer buf = new StringBuffer();
         Cursor cursor = getContentResolver().query(CallLog.Calls.CONTENT_URI,null,null, null, null);
-//        Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,null, null, null);
-        cursor.moveToFirst();
+        //cursor.moveToFirst();
 
         int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
         int name = cursor.getColumnIndex(CallLog.Calls.CACHED_NAME);
@@ -500,14 +522,13 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             TimeUnit time = TimeUnit.DAYS;
             if(callname == null){continue;}
             if(time.convert(diff, TimeUnit.MILLISECONDS) > 180){ continue; }
-            adapter.addItem(new PhoneNumInfo(callname, phoneNum));
+            addItem(new PhoneNumInfo(callname, phoneNum));
         }
         Log.d("getCallLog","getCallLog호출");
 
-        for(int i = 0;i<adapter.items.size();i++){
-            Log.d("item","item["+i+"]:"+adapter.items.get(i).getName()+", "+adapter.items.get(i).getPhoneNumber());
+        for(int i = 0;i<items.size();i++){
+            Log.d("item","item["+i+"]:"+items.get(i).getName()+", "+items.get(i).getPhoneNumber());
         }
-//        cursor.close();
     }
 
     @Override

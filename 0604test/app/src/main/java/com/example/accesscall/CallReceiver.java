@@ -45,7 +45,7 @@ public class CallReceiver extends BroadcastReceiver {
     boolean trigger = false;
 
     // 안심번호 데이터 adapter
-    PhoneNumInfoAdapter adapter = new PhoneNumInfoAdapter();
+    MainActivity instance;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("MissingPermission")
@@ -81,7 +81,7 @@ public class CallReceiver extends BroadcastReceiver {
             // 안심번호 판별을 위해 추가----
             String phone_number = PhoneNumberUtils.formatNumber(phone);
 
-            if(adapter.phoneNumCheck(phone_number)){
+            if(instance.getInstance().phoneNumCheck(phone_number)){
                 //안심 번호 팝업창 생성
                 Intent serviceIntent = new Intent(context, AlertWindow.class);
                 serviceIntent.putExtra(AlertWindow.Number, phone_number);
@@ -324,12 +324,12 @@ public class CallReceiver extends BroadcastReceiver {
         // 진동 설정
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-        
+
         if (phone != null) {
             System.out.println("통화 종료 확인");
             String phone_number = PhoneNumberUtils.formatNumber(phone);
             phoneNumtoReport = phone;
-            
+
             // Todo: 종료 동작 추가
 
             if (MainActivity.getInstance().isVP == 1) {
