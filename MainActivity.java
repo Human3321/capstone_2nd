@@ -22,6 +22,9 @@ import org.json.JSONObject;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.text.html.ImageView;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -421,5 +424,9 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     public void onGranted(int i, @NonNull String[] strings) {
 
     }
+
+    int initialTimeoutMs = 5000; // 초기 타임아웃 값 (5초)
+    int maxNumRetries = 3; // 최대 재시도 횟수
+    float backoffMultiplier = 1.0f; // 재시도 간격 배수
 
 }
