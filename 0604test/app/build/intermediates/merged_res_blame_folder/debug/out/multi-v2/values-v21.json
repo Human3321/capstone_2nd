@@ -4,7 +4,7 @@
             "outputFile": "com.example.accesscall.app-mergeDebugResources-37:/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\gram\\.gradle\\caches\\transforms-3\\5ac46073ee2cb4cbb37aeb0c35be972f\\transformed\\appcompat-1.5.1\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\PC\\.gradle\\caches\\transforms-3\\5ac46073ee2cb4cbb37aeb0c35be972f\\transformed\\appcompat-1.5.1\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,19,20,21,22,24,26,27,28,29,30,32,34,36,38,40,42,43,48,50,52,53,54,56,58,59,60,61,62,63,106,109,152,155,158,160,162,164,167,171,174,175,176,179,180,181,182,183,184,187,188,190,192,194,196,200,202,203,204,205,207,211,213,215,216,217,218,219,220,222,223,224,234,235,236,248",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -23,26 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\gram\\.gradle\\caches\\transforms-3\\1afe04e3287e7a177c0575265f9f1744\\transformed\\media-1.0.0\\res\\values-v21\\values-v21.xml",
-                    "from": {
-                        "startLines": "2,5,8,11",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,223,386,554",
-                        "endLines": "4,7,10,13",
-                        "endColumns": "12,12,12,12",
-                        "endOffsets": "218,381,549,716"
-                    },
-                    "to": {
-                        "startLines": "355,358,362,366",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "25747,25915,26204,26500",
-                        "endLines": "357,360,364,368",
-                        "endColumns": "12,12,12,12",
-                        "endOffsets": "25910,26073,26367,26662"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\gram\\.gradle\\caches\\transforms-3\\d67fad12ed741e83bf24945ad44b1d4f\\transformed\\material-1.7.0\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\PC\\.gradle\\caches\\transforms-3\\d67fad12ed741e83bf24945ad44b1d4f\\transformed\\material-1.7.0\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,24,27,30,33,36,39,42,45,48,51,52,55,60,71,77,87,97,107,117,127,137,147,157,167,177,187,197,207,217,227,233,239,245,251,255,259,260,261,262,266,269,272,275,278,281,284,288,292",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -61,26 +42,26 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\gram\\.gradle\\caches\\transforms-3\\5cab6d98f856bf54586cb6c19f70867f\\transformed\\jetified-firebase-inappmessaging-display-20.3.2\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\PC\\.gradle\\caches\\transforms-3\\1afe04e3287e7a177c0575265f9f1744\\transformed\\media-1.0.0\\res\\values-v21\\values-v21.xml",
                     "from": {
-                        "startLines": "2,5,8,13",
+                        "startLines": "2,5,8,11",
                         "startColumns": "4,4,4,4",
-                        "startOffsets": "55,174,291,586",
-                        "endLines": "4,7,12,15",
+                        "startOffsets": "55,223,386,554",
+                        "endLines": "4,7,10,13",
                         "endColumns": "12,12,12,12",
-                        "endOffsets": "169,286,581,699"
+                        "endOffsets": "218,381,549,716"
                     },
                     "to": {
-                        "startLines": "284,287,290,295",
+                        "startLines": "355,358,362,366",
                         "startColumns": "4,4,4,4",
-                        "startOffsets": "21218,21337,21454,21749",
-                        "endLines": "286,289,294,297",
+                        "startOffsets": "25747,25915,26204,26500",
+                        "endLines": "357,360,364,368",
                         "endColumns": "12,12,12,12",
-                        "endOffsets": "21332,21449,21744,21862"
+                        "endOffsets": "25910,26073,26367,26662"
                     }
                 },
                 {
-                    "source": "C:\\Users\\gram\\.gradle\\caches\\transforms-3\\85b903e3b1c74a11bc4ce1724de90e91\\transformed\\core-1.8.0\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\PC\\.gradle\\caches\\transforms-3\\85b903e3b1c74a11bc4ce1724de90e91\\transformed\\core-1.8.0\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -96,6 +77,25 @@
                         "endLines": "2,17,18,19,353,354,361,365,572,577",
                         "endColumns": "117,63,66,63,115,125,125,127,12,12",
                         "endOffsets": "168,1467,1534,1598,25616,25742,26199,26495,38702,39054"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\PC\\.gradle\\caches\\transforms-3\\5cab6d98f856bf54586cb6c19f70867f\\transformed\\jetified-firebase-inappmessaging-display-20.3.2\\res\\values-v21\\values-v21.xml",
+                    "from": {
+                        "startLines": "2,5,8,13",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,174,291,586",
+                        "endLines": "4,7,12,15",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "169,286,581,699"
+                    },
+                    "to": {
+                        "startLines": "284,287,290,295",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "21218,21337,21454,21749",
+                        "endLines": "286,289,294,297",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "21332,21449,21744,21862"
                     }
                 }
             ]
