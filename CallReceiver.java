@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import android.os.Environment;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -99,22 +100,70 @@ public class CallReceiver extends BroadcastReceiver {
             System.out.println("통화 중 확인");
             String phone_number = PhoneNumberUtils.formatNumber(phone);
 
-
             // 파일 감시 시작
             startFileObservation();
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if(MainActivity.getInstance().isVP == 1){
-                        //Toast.makeText(context, "보이스피싱 의심 전화입니다 !", Toast.LENGTH_SHORT).show();
-                        System.out.println("VPIS == 1 태그");
-                        
-                        Toast.makeText(context, "보이스피싱", Toast.LENGTH_LONG).show();
-                        System.out.println("VPIS == 1 팝업 태그");
-                        
-                        System.out.println("Success 종료 태그");
-                    }
+
+                    ClovaSpeechClient clovaSpeechClient = new ClovaSpeechClient(MainActivity.getInstance().getApplicationContext());
+                    System.out.println("Claova 객체 생성 태그");
+                    ClovaSpeechClient.NestRequestEntity requestEntity = new ClovaSpeechClient.NestRequestEntity();
+                    System.out.println("requestEntity 생성 태그");
+                    // String relativePath = "Recordings/Voice Recorder/A.m4a";
+
+                    clovaSpeechClient.upload(new File(filePath), requestEntity, MainActivity.getInstance().getApplicationContext(), new ClovaSpeechClient.UploadCallback() {
+                        @Override
+                        public void onSuccess(String decodedResponse) {
+                            // 성공적인 응답 처리
+                            System.out.println("ClovaSpeechClient 응답 성공 태그 "+ decodedResponse);
+                            MainActivity.getInstance().sendRequest(decodedResponse, new MainActivity.SendCallback() {
+                                @Override
+                                public void onSuccess() {
+                                    // Todo: 제대로 작동하는지 확인해봐야함!
+                                    if(MainActivity.getInstance().isVP == 1){
+                                        //Toast.makeText(context, "보이스피싱 의심 전화입니다 !", Toast.LENGTH_SHORT).show();
+                                        System.out.println("VPIS == 1 태그");
+
+                                        //보이스 피싱 판별 팝업창 생성
+//                                        Intent serviceIntent = new Intent(context, AlertWindow.class);
+//                                        serviceIntent.putExtra(AlertWindow.Number, phone_number);
+//                                        serviceIntent.putExtra(AlertWindow.isWarning, "피싱");
+//                                        serviceIntent.putExtra(AlertWindow.Count, "0"); //2차 판별이므로 0
+//                                        context.startService(serviceIntent);
+                                        Toast.makeText(context, "보이스피싱", Toast.LENGTH_LONG).show();
+                                        System.out.println("VPIS == 1 팝업 태그");
+                                        // Handler 객체 생성
+//                                        Handler handler = new Handler();
+//
+                                        // 일정 시간 후에 서비스 중지 실행
+//                                        long delayMillis = 5000; // 5초 후에 서비스 중지
+//                                        handler.postDelayed(new Runnable() {
+//                                            @Override
+//                                            public void run() {
+//                                                // 서비스 중지 코드 추가
+//                                                context.stopService(serviceIntent);
+//                                            }
+//                                        }, delayMillis);
+
+                                        System.out.println("Success 종료 태그");
+                                    }
+                                }
+
+                                @Override
+                                public void onError(String errorMessage) {
+                                    System.out.println("callback onError 통신 오류 태그: " + errorMessage);
+                                }
+                            });
+                            System.out.println("글자 서버로 전송 태그 : "+decodedResponse);
+                        }
+                        @Override
+                        public void onError(String errorMessage) {
+                            // 오류 처리
+                            System.out.println("ClovaSpeechClient 오류 태그: " + errorMessage);
+                        }
+                    });
                 }         
             }, 60000); // 60초 지연
         }
