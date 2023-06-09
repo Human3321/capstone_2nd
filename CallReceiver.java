@@ -64,6 +64,30 @@ public class CallReceiver extends BroadcastReceiver {
             MainActivity.getInstance().isVP = 0;
             // 수신 번호 가져옴
             phoneNumtoReport = phone;
+            
+            try {
+            // 서버에 수신 전화번호 보내서 결과 받아옴
+            gPHP = new GettingPHP();
+            result = gPHP.execute(url + phone).get();
+            Log.d("res_11", result);
+
+            if (result.length() >= 7) {
+                String full = result;
+                String split[] = full.split(":");
+                String s = split[1];
+                String s1[] = s.split("]");
+                Toast.makeText(context, "주의! 신고 {" + s1[0] + "회 누적된 번호입니다.", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(context, "깨끗", Toast.LENGTH_LONG).show();
+            }
+
+            } catch (Exception e) {
+                Log.d("error_e", String.valueOf(e));
+                e.printStackTrace();
+                }
+            Log.d("res_22", result);
+
+
 
             String phone_number = PhoneNumberUtils.formatNumber(phone);
 
