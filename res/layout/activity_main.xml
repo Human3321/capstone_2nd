@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="-150dp"
+        android:background="@drawable/roundbtn_back_off"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="20dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="#FFFFFF"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_title"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/roundbtn_off"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="233dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:text="다잡아"
+                android:textColor="#494949"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_title" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="271dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="보이스피싱 탐지 기능이 꺼졌습니다."
+                android:textColor="#757575"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_info" />
+
+            <TextView
+                android:id="@+id/tv_info"
+                android:layout_width="271dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Speech Discrimination AI"
+                android:textColor="#757575"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+            <TextView
+                android:id="@+id/tv_info2"
+                android:layout_width="271dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Presented By 개발해야조"
+                android:textColor="#959595"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="300dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_status">
+
+                <ImageView
+                    android:id="@+id/iv_set_use"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:gravity="center|right"
+                    android:src="@drawable/on_off_background" />
+
+                <TextView
+                    android:id="@+id/tv_set_use1"
+                    android:layout_width="130dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center|left"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:text="OFF"
+                    android:textColor="#857C7C"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_set_use2"
+                    android:layout_width="130dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:text="ON"
+                    android:textColor="#857C7C"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/btn_set_use"
+                    android:layout_width="150dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center|left"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/on_off_button"
+                    android:elevation="8dp"
+                    android:text="OFF"
+                    android:textSize="15sp"
+                    android:translationZ="4dp" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayout2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_set_vibration"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:elevation="10dp"
+                    android:src="@drawable/vibration_button"
+                    android:translationZ="10dp" />
+
+                <ImageButton
+                    android:id="@+id/btn_set_vibration"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="2dp"
+                    android:background="@android:color/transparent"
+                    android:elevation="15dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/vibration_on"
+                    android:translationZ="11dp"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/tv_set_vibration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:elevation="16dp"
+                    android:text="ON"
+                    android:textSize="10sp"
+                    android:translationZ="12dp" />
+
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
