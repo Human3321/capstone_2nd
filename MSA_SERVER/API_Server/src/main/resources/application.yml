@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ser
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://43.201.52.43:54687/sys?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF8&useSSL=false
+    username: '0000'
+    password: '0000'
+
+##
+
+# mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true # ??? ???? (???) ?? ??
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://49.50.172.55:8090/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#
+#spirng:
+#  jpa:
+#    database: mysql
+#    hibernate:
+#      ddl-auto: update
+#    generate-ddl: true
+#    properties:
+ #     hibernate:
+ #       format_sql: true
+ #     enable_lazy_load_no_trans: true
