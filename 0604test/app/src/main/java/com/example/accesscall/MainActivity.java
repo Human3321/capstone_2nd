@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
     // 판별 결과
     int isVP = 0;
+    String percent = "";
     int i = 0; // 안심번호 Load 테스트용
     PhoneNumInfoAdapter adapter;
 
@@ -448,8 +449,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //이 함수는 없어도 괜찮을듯? 모르겠음.. 주석 처리 후 테스트해보고 문제 없으면 폐기해도 OK
-        //폐기할 때는 제일 첫 문단 변수도 제거할 것.
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE) {
             if (!Settings.canDrawOverlays(this)) {
@@ -557,7 +556,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                             System.out.println(response);
                             JSONObject jsonObject = new JSONObject(response);
                             Double per = jsonObject.getDouble("percent");
-                            String percent = String.format("%.2f", per);
+                            percent = String.format("%.2f", per);
                             isVP = jsonObject.getInt("answer");
                             System.out.println("응답 받음 태그");
                             System.out.println("결과/확률 태그 : "+isVP+" / "+percent+"%");

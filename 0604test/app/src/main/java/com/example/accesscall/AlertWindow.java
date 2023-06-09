@@ -25,6 +25,7 @@ public class AlertWindow extends Service {
     public static String isWarning = "1차 판별 결과";
     public static String Count = "신고 횟수";
     public static String Number = "전화 번호";
+    public static String Percent = "피싱 확률";
 
     WindowManager.LayoutParams params;
 
@@ -47,7 +48,6 @@ public class AlertWindow extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Number = intent.getStringExtra(Number);
         isWarning = intent.getStringExtra(isWarning);
-        Count = intent.getStringExtra(Count);
 
         tv_number.setText(Number);  //생성시 받아온 전화번호로 변경
         if (isWarning.equals("안심")) {   //안심번호일 경우
@@ -63,14 +63,17 @@ public class AlertWindow extends Service {
             img.setImageResource(R.drawable.checked);   //체크 이미지로 변경
         }
         else if (isWarning.equals("주의")) {  //신고 이력이 있는 전화번호일 경우
+            Count = intent.getStringExtra(Count);
             tv_result.setText("주의! 신고 " + Count + "회 누적된 번호입니다.");  //결과 텍스트 변경
             tv_result.setTextColor(Color.parseColor("#F39D2F"));  //결과 텍스트 색상 변경
             cv.setCardBackgroundColor(Color.parseColor("#FDF0AF")); //카드뷰 색상 변경
             img.setImageResource(R.drawable.warning);   //주의 이미지로 변경
         }
         else if (isWarning.equals("피싱")) {  //2차 판별 피싱 내용이 감지되었다면
-            tv_result.setText("경고! 보이스피싱으로 탐지되었습니다.");  //결과 텍스트 변경
+            Percent = intent.getStringExtra(Percent);
+            tv_result.setText("경고! 보이스피싱으로 탐지되었습니다.\n보이스피싱 확률 : " + Percent + "%");  //결과 텍스트 변경
             tv_result.setTextColor(Color.parseColor("#9A1E1E"));  //결과 텍스트 색상 변경
+            tv_result.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);  //결과 텍스트 사이즈 변경
             cv.setCardBackgroundColor(Color.parseColor("#EAC5C5")); //카드뷰 색상 변경
             img.setImageResource(R.drawable.alarm);   //경고 이미지로 변경
         }
@@ -80,6 +83,13 @@ public class AlertWindow extends Service {
             tv_result.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);  //결과 텍스트 사이즈 변경
             cv.setCardBackgroundColor(Color.parseColor("#EAC5C5")); //카드뷰 색상 변경
             img.setImageResource(R.drawable.alarm);   //경고 이미지로 변경
+        }
+        else if (isWarning.equals("백그라운드")) {
+            tv_result.setText("백그라운드 실행 중...");  //결과 텍스트 변경
+            tv_result.setTextColor(Color.parseColor("#16B569"));    //결과 텍스트 색상 변경
+            cv.setCardBackgroundColor(Color.parseColor("#D5E8DF")); //카드뷰 색상 변경
+            img.setImageResource(R.drawable.checked);   //체크 이미지로 변경
+            mView.setVisibility(View.INVISIBLE);    //백그라운드용이니까 INVISIBLE...
         }
 
         return super.onStartCommand(intent, flags, startId);

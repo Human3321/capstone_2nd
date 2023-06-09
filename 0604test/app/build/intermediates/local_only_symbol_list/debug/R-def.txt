@@ -13,6 +13,7 @@ drawable close
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_stat_notification
+drawable list_checked
 drawable little_round_btn
 drawable on_off_background
 drawable on_off_button
@@ -31,6 +32,7 @@ drawable roundbtn_stroke
 drawable vibration_button
 drawable vibration_off
 drawable vibration_on
+drawable warning
 id btn
 id btn_set_use
 id btn_set_vibration

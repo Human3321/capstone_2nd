@@ -2633,6 +2633,7 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_stat_notification
 drawable image_placeholder
+drawable list_checked
 drawable little_round_btn
 drawable m3_appbar_background
 drawable m3_popupmenu_background_overlay
@@ -2723,6 +2724,7 @@ drawable tooltip_frame_light
 drawable vibration_button
 drawable vibration_off
 drawable vibration_on
+drawable warning
 id ALT
 id BOTTOM_END
 id BOTTOM_START

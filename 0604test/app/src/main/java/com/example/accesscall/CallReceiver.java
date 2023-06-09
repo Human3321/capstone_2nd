@@ -9,9 +9,11 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.FileObserver;
 import android.os.Handler;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -22,8 +24,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CallReceiver extends BroadcastReceiver {
+
     private String previousState = "";
     public GettingPHP gPHP;
 
@@ -37,8 +41,8 @@ public class CallReceiver extends BroadcastReceiver {
     // 신고용 전역 휴대폰번호
     String phoneNumtoReport;
 
-    // 상대 휴대폰 번호
-    String phone_number;
+    //팝업창 Intent
+    boolean trigger = false;
 
     // 안심번호 데이터 adapter
     PhoneNumInfoAdapter adapter = new PhoneNumInfoAdapter();
@@ -48,10 +52,6 @@ public class CallReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //구 팝업창 관련 처리. 다른 기능 완성 후에도 팝업창 생성에 문제 없으면 제거해도 OK
-        //AlertWindow alertWindow = (AlertWindow) context;
-        //alertWindow.setOverlayVisibility(View.VISIBLE);
-
         if (intent.getAction().equals("android.intent.action.PHONE_STATE")) {
             String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
 
@@ -69,6 +69,8 @@ public class CallReceiver extends BroadcastReceiver {
     }
 
     private void handleRingingCall(Context context, Intent intent) {
+
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
         if (phone != null) {
             System.out.println("통화 수신 확인");
@@ -77,14 +79,13 @@ public class CallReceiver extends BroadcastReceiver {
             phoneNumtoReport = phone;
 
             // 안심번호 판별을 위해 추가----
-            phone_number = PhoneNumberUtils.formatNumber(phone);
+            String phone_number = PhoneNumberUtils.formatNumber(phone);
 
             if(adapter.phoneNumCheck(phone_number)){
                 //안심 번호 팝업창 생성
                 Intent serviceIntent = new Intent(context, AlertWindow.class);
                 serviceIntent.putExtra(AlertWindow.Number, phone_number);
                 serviceIntent.putExtra(AlertWindow.isWarning, "안심");
-                serviceIntent.putExtra(AlertWindow.Count, "0");
                 context.startService(serviceIntent);
 
                 // Handler 객체 생성
@@ -100,6 +101,10 @@ public class CallReceiver extends BroadcastReceiver {
                     }
                 }, delayMillis);
 
+
+                // 진동 0.5초
+                vibrator.vibrate(VibrationEffect.createOneShot(500,100));
+
                 return;
             }
 
@@ -112,12 +117,15 @@ public class CallReceiver extends BroadcastReceiver {
                     String full = result;
                     String split[] = full.split(":");
                     String s = split[1];
-                    String s1[] = s.split("]");
+                    String restr = s.replaceAll("[^0-9]","");
+                    //String s1[] = s.split("]");
+                    //String s2[] = s1[0].split("}");
                     //1차 판별 팝업창 생성
                     Intent serviceIntent = new Intent(context, AlertWindow.class);
                     serviceIntent.putExtra(AlertWindow.Number, phone_number);
                     serviceIntent.putExtra(AlertWindow.isWarning, "주의");
-                    serviceIntent.putExtra(AlertWindow.Count, s1[0]);
+                    serviceIntent.putExtra(AlertWindow.Percent, "0");
+                    serviceIntent.putExtra(AlertWindow.Count, restr);
                     context.startService(serviceIntent);
 
                     // Handler 객체 생성
@@ -132,12 +140,14 @@ public class CallReceiver extends BroadcastReceiver {
                             context.stopService(serviceIntent);
                         }
                     }, delayMillis);
+
+                    // 진동 1초
+                    vibrator.vibrate(VibrationEffect.createOneShot(1000,100));
                 } else {
                     //1차 판별 팝업창 생성
                     Intent serviceIntent = new Intent(context, AlertWindow.class);
                     serviceIntent.putExtra(AlertWindow.Number, phone_number);
                     serviceIntent.putExtra(AlertWindow.isWarning, "깨끗");
-                    serviceIntent.putExtra(AlertWindow.Count, "0");
                     context.startService(serviceIntent);
 
                     // Handler 객체 생성
@@ -152,6 +162,9 @@ public class CallReceiver extends BroadcastReceiver {
                             context.stopService(serviceIntent);
                         }
                     }, delayMillis);
+
+                    // 진동 0.5초
+                    vibrator.vibrate(VibrationEffect.createOneShot(500,100));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -181,11 +194,39 @@ public class CallReceiver extends BroadcastReceiver {
         System.out.println("파일 감시 시작");
     }
 
+    void setTrue() {
+        trigger = true;
+    }
+
     private void handleActiveCall(Context context,Intent intent) {
 
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
         if (phone != null) {
             System.out.println("통화 중 확인");
+            String phone_number = PhoneNumberUtils.formatNumber(phone);
+
+            Intent serviceIntent = new Intent(context, AlertWindow.class);
+            serviceIntent.putExtra(AlertWindow.Number, phone_number);
+            serviceIntent.putExtra(AlertWindow.isWarning, "백그라운드");
+            context.startService(serviceIntent);
+
+            System.out.println("백그라운드 1 실행 완료");
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    context.stopService(serviceIntent);
+                    System.out.println("백그라운드 1 종료");
+
+                    Intent serviceIntent = new Intent(context, AlertWindow.class);
+                    serviceIntent.putExtra(AlertWindow.Number, phone_number);
+                    serviceIntent.putExtra(AlertWindow.isWarning, "백그라운드");
+                    context.startService(serviceIntent);
+
+                    System.out.println("백그라운드 2 실행");
+                }
+            }, 30000);
 
             // 파일 감시 시작
             startFileObservation();
@@ -193,9 +234,7 @@ public class CallReceiver extends BroadcastReceiver {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    /* ToDO : 여러번 받아와도 문제 없는지 확인
-                     *
-                     * */
+                    //ToDO : 여러번 받아와도 문제 없는지 확인
                     ClovaSpeechClient clovaSpeechClient = new ClovaSpeechClient(MainActivity.getInstance().getApplicationContext());
                     System.out.println("Claova 객체 생성 태그");
                     ClovaSpeechClient.NestRequestEntity requestEntity = new ClovaSpeechClient.NestRequestEntity();
@@ -207,36 +246,20 @@ public class CallReceiver extends BroadcastReceiver {
                         public void onSuccess(String decodedResponse) {
                             // 성공적인 응답 처리
                             System.out.println("ClovaSpeechClient 응답 성공 태그 "+ decodedResponse);
+                            /*
                             MainActivity.getInstance().sendRequest(decodedResponse, new MainActivity.SendCallback() {
                                 @Override
                                 public void onSuccess() {
                                     // Todo: 제대로 작동하는지 확인해봐야함!
                                     if(MainActivity.getInstance().isVP == 1){
-                                        //Toast.makeText(context, "보이스피싱 의심 전화입니다 !", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(context, "보이스피싱 의심 전화입니다!", Toast.LENGTH_SHORT).show();
+                                        */
                                         System.out.println("VPIS == 1 태그");
 
-                                        //보이스 피싱 판별 팝업창 생성
-//                                        Intent serviceIntent = new Intent(context, AlertWindow.class);
-//                                        serviceIntent.putExtra(AlertWindow.Number, phone_number);
-//                                        serviceIntent.putExtra(AlertWindow.isWarning, "피싱");
-//                                        serviceIntent.putExtra(AlertWindow.Count, "0"); //2차 판별이므로 0
-//                                        context.startService(serviceIntent);
-                                        Toast.makeText(context, "보이스피싱", Toast.LENGTH_LONG).show();
-                                        System.out.println("VPIS == 1 팝업 태그");
-                                        // Handler 객체 생성
-//                                        Handler handler = new Handler();
-//
-                                        // 일정 시간 후에 서비스 중지 실행
-//                                        long delayMillis = 5000; // 5초 후에 서비스 중지
-//                                        handler.postDelayed(new Runnable() {
-//                                            @Override
-//                                            public void run() {
-//                                                // 서비스 중지 코드 추가
-//                                                context.stopService(serviceIntent);
-//                                            }
-//                                        }, delayMillis);
+                                        setTrue();
 
                                         System.out.println("Success 종료 태그");
+                                        /*
                                     }
                                 }
 
@@ -245,6 +268,7 @@ public class CallReceiver extends BroadcastReceiver {
                                     System.out.println("callback onError 통신 오류 태그: " + errorMessage);
                                 }
                             });
+                            */
                             System.out.println("글자 서버로 전송 태그 : "+decodedResponse);
                         }
                         @Override
@@ -254,8 +278,48 @@ public class CallReceiver extends BroadcastReceiver {
                         }
                     });
                 }
-            }, 60000); // 60초 지연
+            }, 50000); // 60초 지연
 
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (trigger) {
+                        //백그라운드 팝업창 제거
+                        context.stopService(serviceIntent);
+                        System.out.println("백그라운드 2 종료");
+
+                        //보이스 피싱 판별 팝업창 생성
+                        Intent serviceIntent = new Intent(context, AlertWindow.class);
+                        serviceIntent.putExtra(AlertWindow.Number, phone_number);
+                        serviceIntent.putExtra(AlertWindow.isWarning, "피싱");
+                        serviceIntent.putExtra(AlertWindow.Percent, "99.99");
+                        //serviceIntent.putExtra(AlertWindow.Percent, MainActivity.getInstance().percent);
+                        context.startService(serviceIntent);
+
+                        System.out.println("팝업 피싱 실행");
+
+                        // Handler 객체 생성
+                        Handler handler = new Handler();
+
+                        // 일정 시간 후에 서비스 중지 실행
+                        long delayMillis = 5000; // 5초 후에 서비스 중지
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // 서비스 중지 코드 추가
+                                context.stopService(serviceIntent);
+                                System.out.println("팝업 피싱 종료");
+                            }
+                        }, delayMillis);
+
+                        // 진동 1초
+                        vibrator.vibrate(VibrationEffect.createOneShot(1000,100));
+                    }
+                    else {
+                        System.out.println("Not True...");
+                    }
+                }
+            }, 55000);
         }
     }
 
@@ -266,6 +330,7 @@ public class CallReceiver extends BroadcastReceiver {
         
         if (phone != null) {
             System.out.println("통화 종료 확인");
+            String phone_number = PhoneNumberUtils.formatNumber(phone);
             phoneNumtoReport = phone;
             
             // Todo: 종료 동작 추가
@@ -274,13 +339,13 @@ public class CallReceiver extends BroadcastReceiver {
                 // 서버에 수신 전화번호 신고
                 gPHP = new CallReceiver.GettingPHP();
                 gPHP.execute(reportUrl+phoneNumtoReport);
-                Toast.makeText(context, "보이스피싱으로 판별되어 서버에 자동 신고되었습니다.", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "보이스피싱으로 판별되어 서버에 자동 신고되었습니다.", Toast.LENGTH_LONG).show();
 
                 //보이스 피싱 판별 팝업창 생성
-                /*
                 Intent serviceIntent = new Intent(context, AlertWindow.class);
                 serviceIntent.putExtra(AlertWindow.Number, phone_number);
                 serviceIntent.putExtra(AlertWindow.isWarning, "신고");
+                serviceIntent.putExtra(AlertWindow.Percent, "0");   //신고이므로 0
                 serviceIntent.putExtra(AlertWindow.Count, "0"); //2차 판별이므로 0
                 context.startService(serviceIntent);
 
@@ -296,10 +361,9 @@ public class CallReceiver extends BroadcastReceiver {
                         context.stopService(serviceIntent);
                     }
                 }, delayMillis);
-                */
 
-                // 진동 설정
-                vibrator.vibrate(1000);
+                // 진동 1초
+                vibrator.vibrate(VibrationEffect.createOneShot(1000,100));
             } else {
 
             }

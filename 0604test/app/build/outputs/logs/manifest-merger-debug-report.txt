@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-95:12
-INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-95:12
-INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-95:12
-INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-95:12
+ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-96:12
+INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-96:12
+INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-96:12
+INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-96:12
 MERGED from [com.google.android.material:material:1.7.0] C:\Users\PC\.gradle\caches\transforms-3\d67fad12ed741e83bf24945ad44b1d4f\transformed\material-1.7.0\AndroidManifest.xml:17:1-26:12
 MERGED from [com.google.firebase:firebase-inappmessaging-display:20.3.2] C:\Users\PC\.gradle\caches\transforms-3\5cab6d98f856bf54586cb6c19f70867f\transformed\jetified-firebase-inappmessaging-display-20.3.2\AndroidManifest.xml:2:1-30:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\PC\.gradle\caches\transforms-3\42b9ab78819aa58f8147d099d5571812\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
@@ -86,22 +86,22 @@ MERGED from [androidx.print:print:1.0.0] C:\Users\PC\.gradle\caches\transforms-3
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\PC\.gradle\caches\transforms-3\687afe1537b5d6912be21cc875cab234\transformed\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\PC\.gradle\caches\transforms-3\29fdf28c60c15f901849aee46c31f3db\transformed\jetified-protolite-well-known-types-18.0.0\AndroidManifest.xml:2:1-11:12
 MERGED from [io.reactivex.rxjava2:rxandroid:2.0.2] C:\Users\PC\.gradle\caches\transforms-3\b205828e96dc7ed8043b3eb9f5ce618f\transformed\jetified-rxandroid-2.0.2\AndroidManifest.xml:15:1-21:12
-INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-95:12
-INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-95:12
-INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-95:12
+INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-96:12
+INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-96:12
+INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-96:12
 	package
 		INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-95:12
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-96:12
 		INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-95:12
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-96:12
 		INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-95:12
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:1-96:12
 		INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:2:11-69
@@ -194,7 +194,7 @@ ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:24
 	android:name
 		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:24:22-68
 application
-ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:27:5-93:19
+ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:27:5-94:19
 MERGED from [com.google.android.material:material:1.7.0] C:\Users\PC\.gradle\caches\transforms-3\d67fad12ed741e83bf24945ad44b1d4f\transformed\material-1.7.0\AndroidManifest.xml:24:5-20
 MERGED from [com.google.android.material:material:1.7.0] C:\Users\PC\.gradle\caches\transforms-3\d67fad12ed741e83bf24945ad44b1d4f\transformed\material-1.7.0\AndroidManifest.xml:24:5-20
 MERGED from [com.google.firebase:firebase-inappmessaging-display:20.3.2] C:\Users\PC\.gradle\caches\transforms-3\5cab6d98f856bf54586cb6c19f70867f\transformed\jetified-firebase-inappmessaging-display-20.3.2\AndroidManifest.xml:20:5-28:19
@@ -320,51 +320,53 @@ ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:60
 	android:name
 		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:61:17-52
 service#com.example.accesscall.AlertWindow
-ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:65:9-69:74
+ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:65:9-70:74
 	android:enabled
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:67:13-35
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:68:13-35
 	android:exported
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:68:13-36
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:69:13-36
 	android:permission
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:69:13-72
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:70:13-72
+	android:foregroundServiceType
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:67:13-53
 	android:name
 		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:66:13-40
 service#com.example.accesscall.AccessivilityTest
-ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:71:9-82:19
+ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:72:9-83:19
 	android:label
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:73:13-63
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:74:13-63
 	android:exported
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:75:13-36
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:76:13-36
 	android:permission
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:74:13-79
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:75:13-79
 	android:name
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:72:13-46
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:73:13-46
 intent-filter#action:name:android.accessibilityservice.AccessibilityService
-ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:76:13-78:29
+ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:77:13-79:29
 action#android.accessibilityservice.AccessibilityService
-ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:77:17-92
+ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:78:17-92
 	android:name
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:77:25-89
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:78:25-89
 meta-data#android.accessibilityservice
-ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:79:13-81:72
+ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:80:13-82:72
 	android:resource
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:81:17-69
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:82:17-69
 	android:name
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:80:17-60
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:81:17-60
 service#com.example.accesscall.MyFirebaseMessagingService
-ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:84:9-91:19
+ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:85:9-92:19
 	android:exported
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:86:13-37
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:87:13-37
 	android:directBootAware
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:87:13-43
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:88:13-43
 	android:name
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:85:13-54
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:86:13-54
 intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
-ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:88:13-90:29
+ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:89:13-91:29
 action#com.google.firebase.MESSAGING_EVENT
-ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:89:17-78
+ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:90:17-78
 	android:name
-		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:89:25-75
+		ADDED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml:90:25-75
 uses-sdk
 INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\PC\Desktop\test\0604test\app\src\main\AndroidManifest.xml

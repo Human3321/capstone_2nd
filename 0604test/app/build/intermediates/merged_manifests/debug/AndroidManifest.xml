@@ -85,6 +85,7 @@
             android:name="com.example.accesscall.AlertWindow"
             android:enabled="true"
             android:exported="true"
+            android:foregroundServiceType="dataSync"
             android:permission="android.permission.SYSTEM_ALERT_WINDOW" />
         <service
             android:name="com.example.accesscall.AccessivilityTest"
