@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AutoPermissionsListener {
 
     private static final int PERMISSIONS_REQUEST = 100;
     long animationDuration = 1000; // 1초
@@ -27,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
         return instance;
     }
 
+    private static final int PERMISSIONS_REQUEST = 100;
+
     public static boolean vib_mode; // 알림 진동 설정 (true - o , false - x)
+    
     public static boolean use_set; // 사용 설정 (true - ON , false - OFF)
 
     // 수신에 사용할 IP 주소
@@ -38,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
     // 판별 결과
     static int isVP = 0;
 
+    ArrayList<PhoneNumInfo> items;
+
+    int i;
+
+    // sharepref
+    String state;
+
+    String vibState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         Button btn_set_use = (Button) findViewById(R.id.btn_set_use); // 어플 사용 설정 버튼
         Button btn_set_vib = (Button) findViewById(R.id.btn_set_vibration); // 진동 알림 설정 버튼
         Button btn_set_vib_txt = (Button) findViewById(R.id.btn_set_vibration_txt); // 진동 알림 설정 버튼 껍데기
+
+        AutoPermissions.Companion.loadAllPermissions(this, PERMISSIONS_REQUEST);
+        getCallLog();
 
         // 진동 알림 설정 버튼 리스너
         btn_set_vib.setOnClickListener(new View.OnClickListener(){
@@ -56,7 +71,12 @@ public class MainActivity extends AppCompatActivity {
 
                 // 진동알림 ON -> OFF
                 if(str_btn_vib.equals("ON")){
-                    btn_set_vib.setText("OFF");
+                    vibState ="OFF";
+
+                    // 진동 설정 버튼과 텍스트 변경
+                    tv_set_vibration.setText("OFF");
+                    btn_set_vibration.setImageResource(R.drawable.vibration_off);
+
 
                     // 버튼 클릭시 애니메이션
                     ValueAnimator animator1 = ObjectAnimator.ofFloat(btn_set_vib, "translationX", 100f,150f,0f); // values 수정 필요
@@ -72,7 +92,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // 진동알림 OFF -> ON
                 else if(str_btn_vib.equals("OFF")){
-                    btn_set_vib.setText("ON");
+                    vibState ="ON";
+
+                    // 진동 설정 버튼과 텍스트 변경
+                    tv_set_vibration.setText("ON");
+                    btn_set_vibration.setImageResource(R.drawable.vibration_on);
 
                     // 버튼 클릭시 애니메이션
                     ValueAnimator animator2 = ObjectAnimator.ofFloat(btn_set_vib, "translationX", 100f,150f,0f);
@@ -99,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if(str_btn.equals("ON")){ // 클릭 -> 실시간 탐지 OFF
 
+                    state ="OFF";
+
                     // 버튼 및 텍스트 뷰의 텍스트 변경
                     btn_set_use.setText("OFF");
                     txt.setText("실시간 탐지가 꺼졌습니다.");
@@ -109,11 +135,21 @@ public class MainActivity extends AppCompatActivity {
                     btn_set_use.setBackground(btn_front);
                     btn_set_use_back.setBackground(btn_back);*/
 
+
+
+
+
+
+
+                    btn_set_use.setText("OFF");
+
                     // 어플 사용 설정 OFF
                     use_set = false;
 
                 }
                 else if(str_btn.equals("OFF")){ // 클릭 -> 실시간 탐지 ON
+
+                    state ="ON";
 
                     // + 휴대폰 권한 받아오기
                     onCheckPermission();
@@ -128,12 +164,146 @@ public class MainActivity extends AppCompatActivity {
                     btn_set_use.setBackground(btn_front);
                     btn_set_use_back.setBackground(btn_back);*/
 
+
+
+
+
+
+
+
+
+                    btn_set_use.setText("ON");
+
                     // 어플 사용 설정 ON
                     use_set = true;
+
+                    i++;
+                    getCallLog();
 
                 }
             }
         });
+    }
+
+    
+    private void saveState(){
+        SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+
+        editor.putString("state", state);
+        editor.putString("vibState", vibState);
+        editor.commit();
+
+        Log.d("tag","저장됨"+state);
+        Log.d("tag","저장됨"+vibState);
+    }
+
+    private void loadState(){
+        SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        state = pref.getString("state",null);
+        vibState = pref.getString("vibState", null);
+
+        Log.d("tag","로드-"+state);
+        Log.d("tag","로드-"+vibState);
+
+        iv_title = (ImageView) findViewById(R.id.iv_title); //어플 사용 설정 버튼 위 이미지
+        btn_set_use = (Button) findViewById(R.id.btn_set_use);  // 어플 사용 설정 버튼
+        iv_set_use = (ImageView) findViewById(R.id.iv_set_use);    //어플 사용 설정 버튼 배경
+        tv_status = (TextView) findViewById(R.id.tv_status);    //어플 사용 설정 상태 텍스트
+
+        btn_set_vibration = (ImageButton) findViewById(R.id.btn_set_vibration); //진동 설정 버튼
+        tv_set_vibration = (TextView) findViewById(R.id.tv_set_vibration);  //진동 설정 텍스트
+
+        if(state != null){
+            if(state.contains("ON")){   // 저장된 어플 사용 설정이 ON이라면
+                // 팝업창 권한
+                onCheckPermission();
+
+                //어플 배경 이미지 변경
+                iv_back.setBackgroundResource(R.drawable.roundbtn_back_on);
+
+                // 어플 설정 버튼 및 텍스트 변경
+                iv_title.setBackgroundResource(R.drawable.roundbtn_on);
+
+                // 이동 거리 계산 (100dp를 픽셀로 변환)
+                float distanceInDp = 100f;
+                float scale = getResources().getDisplayMetrics().density;
+                int distanceInPixels = (int) (distanceInDp * scale + 0.5f);
+
+                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", distanceInPixels);
+                animator_btn.setDuration(animationDuration);
+                animator_btn.start();
+                btn_set_use.setText("ON");
+
+                tv_status.setText("보이스피싱 탐지 중입니다.");
+
+                // 어플 사용 설정 ON
+                use_set = true;
+
+                getCallLog();
+
+            }
+            else if(state.contains("OFF")){ // 저장된 어플 사용 설정이 OFF라면
+                //어플 배경 이미지 변경
+                iv_back.setBackgroundResource(R.drawable.roundbtn_back_off);
+
+                // 어플 설정 버튼 및 텍스트 변경
+                iv_title.setBackgroundResource(R.drawable.roundbtn_off);
+
+                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", 0);
+
+                animator_btn.setDuration(animationDuration);
+                animator_btn.start();
+                btn_set_use.setText("OFF");
+
+                tv_status.setText("보이스피싱 탐지 기능이 꺼졌습니다.");
+
+                // 어플 사용 설정 OFF
+                use_set = false;
+            }
+        }
+
+        if(vibState != null){
+            if(vibState.contains("ON")){
+                // 진동 설정 버튼과 텍스트 변경
+                tv_set_vibration.setText("ON");
+                btn_set_vibration.setImageResource(R.drawable.vibration_on);
+
+                // 알림 진동 설정 켬
+                vib_mode = true;
+            }
+            else if(vibState.contains("OFF")){
+                // 진동 설정 버튼과 텍스트 변경
+                tv_set_vibration.setText("OFF");
+                btn_set_vibration.setImageResource(R.drawable.vibration_off);
+
+                // 알림 진동 설정 끔
+                vib_mode = false;
+            }
+        }
+    }
+
+    // 준범 - SharedPreference
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("tag","onPause 호출됨");
+        saveState();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("tag","onResume 호출됨");
+        loadState();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("tag","onDestroy 호출됨");
+        saveState();
     }
 
     // 어플 최초 실행 시 권한을 받아옴
@@ -164,4 +334,77 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    
+    public void addItem(PhoneNumInfo item){
+        if(!items.contains(item)){
+            items.add(item);
+        }
+    }
+
+    public boolean phoneNumCheck(String phoneNum){
+        boolean flag = false;
+
+        for(int i = 0; i < items.size(); i++){
+            PhoneNumInfo info = items.get(i);
+
+            Log.d("check","item:"+info.getName()+"/"+info.getPhoneNumber()+"phoneNum:"+phoneNum);
+
+            if(info.getPhoneNumber().equals(phoneNum)){
+                flag = true;
+                return flag;
+            }
+        }
+        return flag;
+    }
+
+    public void getCallLog(){
+        items = new ArrayList<PhoneNumInfo>();
+        
+        StringBuffer buf = new StringBuffer();
+        Cursor cursor = getContentResolver().query(CallLog.Calls.CONTENT_URI,null,null, null, null);
+
+        int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
+        int name = cursor.getColumnIndex(CallLog.Calls.CACHED_NAME);
+        int date = cursor.getColumnIndex(CallLog.Calls.DATE);
+
+        while (cursor.moveToNext()) {
+            String callname = cursor.getString(name);
+            String phoneNum = cursor.getString(number);
+            phoneNum = PhoneNumberUtils.formatNumber(phoneNum);
+            
+            String callDate = cursor.getString(date);
+            Date callDayTime = new Date(Long.valueOf(callDate));
+            Date now = new Date();
+            long diff = now.getTime() - callDayTime.getTime();
+            TimeUnit time = TimeUnit.DAYS;
+
+            if(callname == null){
+                continue;
+            }
+
+            if(time.convert(diff, TimeUnit.MILLISECONDS) > 180){
+                continue;
+            }
+
+            addItem(new PhoneNumInfo(callname, phoneNum));
+        }
+
+        Log.d("getCallLog","getCallLog호출");
+
+        for(int i = 0;i<items.size();i++){
+            Log.d("item","item["+i+"]:"+items.get(i).getName()+", "+items.get(i).getPhoneNumber());
+        }
+    }
+
+    @Override
+    public void onDenied(int i, @NonNull String[] strings) {
+
+    }
+
+    @Override
+    public void onGranted(int i, @NonNull String[] strings) {
+
+    }
+
 }

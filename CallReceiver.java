@@ -32,6 +32,8 @@ public class CallReceiver extends BroadcastReceiver {
     public GettingPHP gPHP;
     String result = "";
 
+    MainActivity instance;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("MissingPermission")
 
@@ -62,8 +64,10 @@ public class CallReceiver extends BroadcastReceiver {
             // 수신 번호 가져옴
             phoneNumtoReport = phone;
 
-            if(adapter.phoneNumCheck(phone_number)){
-                
+            String phone_number = PhoneNumberUtils.formatNumber(phone);
+
+            if(instance.getInstance().phoneNumCheck(phone_number)){
+                return;
             }
         }
     }
@@ -93,6 +97,8 @@ public class CallReceiver extends BroadcastReceiver {
         String phone = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
         if (phone != null) {
             System.out.println("통화 중 확인");
+            String phone_number = PhoneNumberUtils.formatNumber(phone);
+
 
             // 파일 감시 시작
             startFileObservation();
@@ -121,6 +127,7 @@ public class CallReceiver extends BroadcastReceiver {
         
         if (phone != null) {
             System.out.println("통화 종료 확인");
+            String phone_number = PhoneNumberUtils.formatNumber(phone);
             phoneNumtoReport = phone;
             
             // Todo: 종료 동작 추가
