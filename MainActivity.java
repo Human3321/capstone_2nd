@@ -62,6 +62,10 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     ArrayList<PhoneNumInfo> items;
 
     int i;
+    
+   // 큐 선언(필수)
+   RequestQueue queue;
+
 
     // sharepref
     String state;
@@ -201,8 +205,13 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 }
             }
         });
+        
+        if(queue != null) {
+            queue = Volley.newRequestQueue(getApplicationContext());
+        } //RequestQueue 생성
     }
 
+    
     
     private void saveState(){
         SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
@@ -428,5 +437,67 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     int initialTimeoutMs = 5000; // 초기 타임아웃 값 (5초)
     int maxNumRetries = 3; // 최대 재시도 횟수
     float backoffMultiplier = 1.0f; // 재시도 간격 배수
+    RetryPolicy retryPolicy = new DefaultRetryPolicy(initialTimeoutMs, maxNumRetries, backoffMultiplier);
 
+    // STT 텍스트를 바탕으로 서버에 결과 전송
+    public void sendRequest(String txt, 
+                            final MainActivity.SendCallback callback) {
+        // url 주소
+        String url = "http://49.50.172.239:8081/myAI/";
+        // url 인코딩
+        String encodetxt = "";
+        try {
+            encodetxt = URLEncoder.encode(txt, "UTF-8");
+        }
+        catch (Exception e){
+            encodetxt = "URLerror";
+        }
+        url += "5/"+encodetxt+"/";
+        System.out.println("전송 : "+url);
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                url,
+                new Response.Listener<String>() { //응답을 잘 받았을 때 이 메소드가 자동으로 호출
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            System.out.println("전송 : " + txt);
+                            // parsing
+                            System.out.println(response);
+                            JSONObject jsonObject = new JSONObject(response);
+                            Double per = jsonObject.getDouble("percent");
+                            String percent = String.format("%.2f", per);
+                            isVP = jsonObject.getInt("answer");
+                            System.out.println("응답 받음 태그");
+                            System.out.println("결과/확률 태그 : "+isVP+" / "+percent+"%");
+                            callback.onSuccess();
+                        }
+                        catch (Exception e){
+                            Double percent = 0.0;
+                            isVP = 0;
+                            System.out.println("응답 에러 태그");
+                            callback.onError(e.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() { //에러 발생시 호출될 리스너 객체
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("전송 응답 에러 : " + error.toString());
+                        //에러
+                        Toast.makeText(getApplicationContext(), "에러가 발생하였습니다. : " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+        System.out.println("요청 준비");
+        request.setRetryPolicy(retryPolicy); // RetryPolicy 설정
+        request.setShouldCache(false); //이전 결과 있어도 새로 요청하여 응답을 보여준다.
+        queue = Volley.newRequestQueue(this); // requestQueue 초기화 필수
+        queue.add(request);
+        System.out.println("요청 보냄.");
+    };
+
+    public interface SendCallback {
+        void onSuccess();
+        void onError(String errorMessage);
+    }
 }
