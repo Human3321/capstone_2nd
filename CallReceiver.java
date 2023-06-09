@@ -150,26 +150,8 @@ public class CallReceiver extends BroadcastReceiver {
                                         //Toast.makeText(context, "보이스피싱 의심 전화입니다 !", Toast.LENGTH_SHORT).show();
                                         System.out.println("VPIS == 1 태그");
 
-                                        //보이스 피싱 판별 팝업창 생성
-//                                        Intent serviceIntent = new Intent(context, AlertWindow.class);
-//                                        serviceIntent.putExtra(AlertWindow.Number, phone_number);
-//                                        serviceIntent.putExtra(AlertWindow.isWarning, "피싱");
-//                                        serviceIntent.putExtra(AlertWindow.Count, "0"); //2차 판별이므로 0
-//                                        context.startService(serviceIntent);
                                         Toast.makeText(context, "보이스피싱", Toast.LENGTH_LONG).show();
                                         System.out.println("VPIS == 1 팝업 태그");
-                                        // Handler 객체 생성
-//                                        Handler handler = new Handler();
-//
-                                        // 일정 시간 후에 서비스 중지 실행
-//                                        long delayMillis = 5000; // 5초 후에 서비스 중지
-//                                        handler.postDelayed(new Runnable() {
-//                                            @Override
-//                                            public void run() {
-//                                                // 서비스 중지 코드 추가
-//                                                context.stopService(serviceIntent);
-//                                            }
-//                                        }, delayMillis);
 
                                         System.out.println("Success 종료 태그");
                                     }
