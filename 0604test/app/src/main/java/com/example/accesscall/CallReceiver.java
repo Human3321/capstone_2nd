@@ -246,20 +246,18 @@ public class CallReceiver extends BroadcastReceiver {
                         public void onSuccess(String decodedResponse) {
                             // 성공적인 응답 처리
                             System.out.println("ClovaSpeechClient 응답 성공 태그 "+ decodedResponse);
-                            /*
                             MainActivity.getInstance().sendRequest(decodedResponse, new MainActivity.SendCallback() {
                                 @Override
                                 public void onSuccess() {
                                     // Todo: 제대로 작동하는지 확인해봐야함!
                                     if(MainActivity.getInstance().isVP == 1){
                                         //Toast.makeText(context, "보이스피싱 의심 전화입니다!", Toast.LENGTH_SHORT).show();
-                                        */
                                         System.out.println("VPIS == 1 태그");
 
                                         setTrue();
 
                                         System.out.println("Success 종료 태그");
-                                        /*
+
                                     }
                                 }
 
@@ -268,7 +266,6 @@ public class CallReceiver extends BroadcastReceiver {
                                     System.out.println("callback onError 통신 오류 태그: " + errorMessage);
                                 }
                             });
-                            */
                             System.out.println("글자 서버로 전송 태그 : "+decodedResponse);
                         }
                         @Override
