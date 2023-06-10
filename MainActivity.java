@@ -109,14 +109,46 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
     String vibState;
 
+    ImageView iv_back;  //어플 배경
+    ImageView iv_title, iv_set_use; // 어플 설정 On/Off 버튼 위 이미지, On/Off 버튼 배경
+    Button btn_set_use; // 어플 설정 On/Off 버튼
+    ImageButton btn_set_vibration;  // 진동 설정 버튼
+    TextView tv_set_vibration, tv_status;   // On/Off 버튼 배경 텍스트, 진동 설정 텍스트, 어플 설정 텍스트
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);  //세로 고정
         setContentView(R.layout.activity_main);
 
-        Button btn_set_use = (Button) findViewById(R.id.btn_set_use); // 어플 사용 설정 버튼
-        Button btn_set_vib = (Button) findViewById(R.id.btn_set_vibration); // 진동 알림 설정 버튼
-        Button btn_set_vib_txt = (Button) findViewById(R.id.btn_set_vibration_txt); // 진동 알림 설정 버튼 껍데기
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            System.out.println("Fetching FCM registration token failed");
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        // Log and toast
+                        System.out.println(token);
+//                        Toast.makeText(MainActivity.this, "Your device registration token is " + token, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+        iv_back = (ImageView) findViewById(R.id.iv_back); //어플 배경 이미지
+
+        iv_title = (ImageView) findViewById(R.id.iv_title); //어플 사용 설정 버튼 위 이미지
+        btn_set_use = (Button) findViewById(R.id.btn_set_use);  // 어플 사용 설정 버튼
+        iv_set_use = (ImageView) findViewById(R.id.iv_set_use);    //어플 사용 설정 버튼 배경
+        tv_status = (TextView) findViewById(R.id.tv_status);    //어플 사용 설정 상태 텍스트
+
+        btn_set_vibration = (ImageButton) findViewById(R.id.btn_set_vibration); //진동 설정 버튼
+        tv_set_vibration = (TextView) findViewById(R.id.tv_set_vibration);  //진동 설정 텍스트
 
         AutoPermissions.Companion.loadAllPermissions(this, PERMISSIONS_REQUEST);
         getCallLog();
@@ -165,8 +197,11 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                     animator2.start();
                     animator4.start();
 
-                    // 알림 진동 설정 켬
-                    vib_mode = true;
+                    // 1. Vibrator 객체 생성
+                    Vibrator vibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
+
+                    // 2. 진동 구현: 1000ms동안 100 강도의 진동
+                    vibrator.vibrate(VibrationEffect.createOneShot(1000,100));
                 }
             }
         });
@@ -194,8 +229,26 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                     btn_set_use.setBackground(btn_front);
                     btn_set_use_back.setBackground(btn_back);*/
 
+                    //어플 배경 이미지 변경
+                iv_back.setBackgroundResource(R.drawable.roundbtn_back_list_off);
+                AnimationDrawable animationDrawable_back = (AnimationDrawable) iv_back.getBackground();
+                animationDrawable_back.setEnterFadeDuration(500);
+                animationDrawable_back.setExitFadeDuration(500);
+                animationDrawable_back.start();
 
+                // 어플 설정 버튼 및 텍스트 변경
+                iv_title.setBackgroundResource(R.drawable.roundbtn_list_off);
+                AnimationDrawable animationDrawable = (AnimationDrawable) iv_title.getBackground();
+                animationDrawable.setEnterFadeDuration(500);
+                animationDrawable.setExitFadeDuration(500);
+                animationDrawable.start();
 
+                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", 0);
+                animator_btn.setDuration(animationDuration);
+                animator_btn.start();
+                btn_set_use.setText("OFF");
+
+                tv_status.setText("보이스피싱 탐지 기능이 꺼졌습니다.");
 
 
 
@@ -224,7 +277,34 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                     btn_set_use_back.setBackground(btn_back);*/
 
 
+                    // 팝업창 권한
+                onCheckPermission();
 
+                //어플 배경 이미지 변경
+                iv_back.setBackgroundResource(R.drawable.roundbtn_back_list_on);
+                AnimationDrawable animationDrawable_back = (AnimationDrawable) iv_back.getBackground();
+                animationDrawable_back.setEnterFadeDuration(500);
+                animationDrawable_back.setExitFadeDuration(500);
+                animationDrawable_back.start();
+
+                // 어플 설정 버튼 및 텍스트 변경
+                iv_title.setBackgroundResource(R.drawable.roundbtn_list_on);
+                AnimationDrawable animationDrawable = (AnimationDrawable) iv_title.getBackground();
+                animationDrawable.setEnterFadeDuration(500);
+                animationDrawable.setExitFadeDuration(500);
+                animationDrawable.start();
+
+                // 이동 거리 계산 (100dp를 픽셀로 변환)
+                float distanceInDp = 100f;
+                float scale = getResources().getDisplayMetrics().density;
+                int distanceInPixels = (int) (distanceInDp * scale + 0.5f);
+
+                ObjectAnimator animator_btn = ObjectAnimator.ofFloat(btn_set_use, "translationX", distanceInPixels);
+                animator_btn.setDuration(animationDuration);
+                animator_btn.start();
+                btn_set_use.setText("ON");
+
+                tv_status.setText("보이스피싱 탐지 중입니다.");
 
 
 
@@ -381,6 +461,34 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 ActivityCompat.requestPermissions(this,new String[]{READ_PHONE_STATE, READ_CALL_LOG,SYSTEM_ALERT_WINDOW}, PERMISSIONS_REQUEST);
             } else{
                 ActivityCompat.requestPermissions(this,new String[]{READ_PHONE_STATE, READ_CALL_LOG,SYSTEM_ALERT_WINDOW}, PERMISSIONS_REQUEST);
+            }
+        }
+
+        //팝업창 권한 처리
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {   // 마시멜로우 이상일 경우
+            if (!Settings.canDrawOverlays(this)) {              // 체크
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE);
+            } else {
+                //startService(new Intent(MainActivity.this, AlertWindow.class));
+            }
+        } else {
+            //startService(new Intent(MainActivity.this, AlertWindow.class));
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE) {
+            if (!Settings.canDrawOverlays(this)) {
+                // TODO 동의를 얻지 못했을 경우의 처리
+
+            }
+            else {
+                //startService(new Intent(MainActivity.this, AlertWindow.class));
             }
         }
     }

@@ -70,6 +70,34 @@ public class CallReceiver extends BroadcastReceiver {
             MainActivity.getInstance().isVP = 0;
             // 수신 번호 가져옴
             phoneNumtoReport = phone;
+
+            if(instance.getInstance().phoneNumCheck(phone_number)){
+                //안심 번호 팝업창 생성
+                Intent serviceIntentSecurity = new Intent(context, AlertWindow.class);
+                serviceIntentSecurity.putExtra(AlertWindow.Number, phone_number);
+                serviceIntentSecurity.putExtra(AlertWindow.isWarning, "안심");
+                context.startService(serviceIntentSecurity);
+
+                // Handler 객체 생성
+                Handler handler = new Handler();
+
+                // 일정 시간 후에 서비스 중지 실행
+                long delayMillis = 3000; // 3초 후에 서비스 중지
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 서비스 중지 코드 추가
+                        context.stopService(serviceIntentSecurity);
+                    }
+                }, delayMillis);
+
+
+                // 진동 0.5초
+                Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(VibrationEffect.createOneShot(500,100));
+
+                return;
+            }
             
             try {
             // 서버에 수신 전화번호 보내서 결과 받아옴
@@ -81,10 +109,56 @@ public class CallReceiver extends BroadcastReceiver {
                 String full = result;
                 String split[] = full.split(":");
                 String s = split[1];
-                String s1[] = s.split("]");
-                Toast.makeText(context, "주의! 신고 {" + s1[0] + "회 누적된 번호입니다.", Toast.LENGTH_LONG).show();
+                String restr = s.replaceAll("[^0-9]","");
+                    //String s1[] = s.split("]");
+                    //String s2[] = s1[0].split("}");
+                    //1차 판별 팝업창 생성
+                    Intent serviceIntentWarning = new Intent(context, AlertWindow.class);
+                    serviceIntentWarning.putExtra(AlertWindow.Number, phone_number);
+                    serviceIntentWarning.putExtra(AlertWindow.isWarning, "주의");
+                    serviceIntentWarning.putExtra(AlertWindow.Percent, "0");
+                    serviceIntentWarning.putExtra(AlertWindow.Count, restr);
+                    context.startService(serviceIntentWarning);
+
+                    // Handler 객체 생성
+                    Handler handler = new Handler();
+
+                    // 일정 시간 후에 서비스 중지 실행
+                    long delayMillis = 3000; // 3초 후에 서비스 중지
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // 서비스 중지 코드 추가
+                            context.stopService(serviceIntentWarning);
+                        }
+                    }, delayMillis);
+
+                    // 진동 1초
+                    Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                    vibrator.vibrate(VibrationEffect.createOneShot(1000,100));
             } else {
-                Toast.makeText(context, "깨끗", Toast.LENGTH_LONG).show();
+                //1차 판별 팝업창 생성
+                    Intent serviceIntentClean = new Intent(context, AlertWindow.class);
+                    serviceIntentClean.putExtra(AlertWindow.Number, phone_number);
+                    serviceIntentClean.putExtra(AlertWindow.isWarning, "깨끗");
+                    context.startService(serviceIntentClean);
+
+                    // Handler 객체 생성
+                    Handler handler = new Handler();
+
+                    // 일정 시간 후에 서비스 중지 실행
+                    long delayMillis = 3000; // 3초 후에 서비스 중지
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // 서비스 중지 코드 추가
+                            context.stopService(serviceIntentClean);
+                        }
+                    }, delayMillis);
+
+                    // 진동 0.5초
+                    Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                    vibrator.vibrate(VibrationEffect.createOneShot(500,100));
             }
 
             } catch (Exception e) {
@@ -130,6 +204,28 @@ public class CallReceiver extends BroadcastReceiver {
             System.out.println("통화 중 확인");
             String phone_number = PhoneNumberUtils.formatNumber(phone);
 
+            Intent serviceIntentBack = new Intent(context, AlertWindow.class);
+            serviceIntentBack.putExtra(AlertWindow.Number, phone_number);
+            serviceIntentBack.putExtra(AlertWindow.isWarning, "백그라운드");
+            context.startService(serviceIntentBack);
+
+            System.out.println("백그라운드 1 실행 완료");
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    context.stopService(serviceIntentBack);
+                    System.out.println("백그라운드 1 종료");
+
+                    Intent serviceIntentBack = new Intent(context, AlertWindow.class);
+                    serviceIntentBack.putExtra(AlertWindow.Number, phone_number);
+                    serviceIntentBack.putExtra(AlertWindow.isWarning, "백그라운드");
+                    context.startService(serviceIntentBack);
+
+                    System.out.println("백그라운드 2 실행");
+                }
+            }, 30000);
+
             // 파일 감시 시작
             startFileObservation();
 
@@ -153,13 +249,80 @@ public class CallReceiver extends BroadcastReceiver {
                                 public void onSuccess() {
                                     // Todo: 제대로 작동하는지 확인해봐야함!
                                     if(MainActivity.getInstance().isVP == 1){
-                                        //Toast.makeText(context, "보이스피싱 의심 전화입니다 !", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "보이스피싱 의심 전화입니다!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "보이스피싱 확률 : " + MainActivity.getInstance().percent + "입니다.", Toast.LENGTH_SHORT).show();
                                         System.out.println("VPIS == 1 태그");
 
-                                        Toast.makeText(context, "보이스피싱", Toast.LENGTH_LONG).show();
-                                        System.out.println("VPIS == 1 팝업 태그");
+                                        //백그라운드 팝업창 제거
+                                        context.stopService(serviceIntentBack);
+                                        System.out.println("백그라운드 2 종료");
 
-                                        System.out.println("Success 종료 태그");
+                                        //보이스 피싱 판별 팝업창 생성
+                                        Intent serviceIntentAlert = new Intent(context, AlertWindow.class);
+                                        serviceIntentAlert.putExtra(AlertWindow.Number, phone_number);
+                                        serviceIntentAlert.putExtra(AlertWindow.isWarning, "피싱");
+                                        serviceIntentAlert.putExtra(AlertWindow.Percent, MainActivity.getInstance().percent);
+                                        context.startService(serviceIntentAlert);
+
+                                        System.out.println("팝업 피싱 실행");
+
+                                        // Handler 객체 생성
+                                        Handler handler = new Handler();
+
+                                        // 일정 시간 후에 서비스 중지 실행
+                                        long delayMillis = 5000; // 5초 후에 서비스 중지
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                // 서비스 중지 코드 추가
+                                                context.stopService(serviceIntentAlert);
+                                                System.out.println("팝업 피싱 종료");
+                                            }
+                                        }, delayMillis);
+
+                                        // 진동 1초
+                                        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                                        vibrator.vibrate(VibrationEffect.createOneShot(1000,100));
+
+                                        System.out.println("Success(피싱) 종료 태그");
+                                    }
+                                    else {
+                                        Toast.makeText(context, "안전한 전화입니다!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "보이스피싱 확률 : " + MainActivity.getInstance().percent + "입니다.", Toast.LENGTH_SHORT).show();
+                                        System.out.println("VPIS == 0 태그");
+
+                                        //백그라운드 팝업창 제거
+                                        context.stopService(serviceIntentBack);
+                                        System.out.println("백그라운드 2 종료");
+
+                                        //보이스 피싱 판별 팝업창 생성
+                                        Intent serviceIntentSave = new Intent(context, AlertWindow.class);
+                                        serviceIntentSave.putExtra(AlertWindow.Number, phone_number);
+                                        serviceIntentSave.putExtra(AlertWindow.isWarning, "안전");
+                                        serviceIntentSave.putExtra(AlertWindow.Percent, MainActivity.getInstance().percent);
+                                        context.startService(serviceIntentSave);
+
+                                        System.out.println("팝업 안전 실행");
+
+                                        // Handler 객체 생성
+                                        Handler handler = new Handler();
+
+                                        // 일정 시간 후에 서비스 중지 실행
+                                        long delayMillis = 5000; // 5초 후에 서비스 중지
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                // 서비스 중지 코드 추가
+                                                context.stopService(serviceIntentSave);
+                                                System.out.println("팝업 안전 종료");
+                                            }
+                                        }, delayMillis);
+
+                                        // 진동 0.5초
+                                        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                                        vibrator.vibrate(VibrationEffect.createOneShot(500,100));
+
+                                        System.out.println("Success(안전) 종료 태그");
                                     }
                                 }
 
@@ -177,7 +340,7 @@ public class CallReceiver extends BroadcastReceiver {
                         }
                     });
                 }         
-            }, 60000); // 60초 지연
+            }, 50000); // 50초 지연
         }
     }
 
@@ -197,8 +360,32 @@ public class CallReceiver extends BroadcastReceiver {
                 // 서버에 수신 전화번호 신고
                 gPHP = new CallReceiver.GettingPHP();
                 gPHP.execute(reportUrl+phoneNumtoReport);
-            } else {
+                Toast.makeText(context, "보이스피싱으로 판별되어 서버에 자동 신고되었습니다.", Toast.LENGTH_LONG).show();
 
+                //보이스 피싱 판별 팝업창 생성
+                Intent serviceIntentReport = new Intent(context, AlertWindow.class);
+                serviceIntentReport.putExtra(AlertWindow.Number, phone_number);
+                serviceIntentReport.putExtra(AlertWindow.isWarning, "신고");
+                context.startService(serviceIntentReport);
+
+                // Handler 객체 생성
+                Handler handler = new Handler();
+
+                // 일정 시간 후에 서비스 중지 실행
+                long delayMillis = 3000; // 3초 후에 서비스 중지
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 서비스 중지 코드 추가
+                        context.stopService(serviceIntentReport);
+                    }
+                }, delayMillis);
+
+                // 진동 0.5초
+                Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(VibrationEffect.createOneShot(500,100));
+            } else {
+                System.out.println("보이스피싱이 아니므로 팝업 없이 종료..");
             }
         }
     }
